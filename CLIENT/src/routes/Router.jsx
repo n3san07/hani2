@@ -12,7 +12,7 @@ import FavoriteResidences from "../components/Residences/FavoriteResidences/Favo
 import EditResidences from "../components/Residences/EditResidences/EditResidences";
 import UserDetailsContext from "../context/UserDetailsContext";
 import EditUserProfile from "../components/UserProfile/EditUserProfile";
-import MainLayOut from "../components/layout/main/main";
+import MainLayOut from "../components/layout/main/MainLayOut";
 
 const Router = () => {
   const {UserDetails } = useContext(UserDetailsContext);
