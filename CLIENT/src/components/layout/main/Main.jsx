@@ -4,7 +4,7 @@ import Companies from "../../Companies/Companies";
 import Value from "../../Value/Value";
 import Contact from "../../Contact/Contact";
 import PopularResidences from "../../PopularResidences/Residencies";
-const Main = () => {
+const MainLayOut = () => {
   return (
     <div className="App">
       <Hero />
@@ -16,4 +16,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainLayOut;
