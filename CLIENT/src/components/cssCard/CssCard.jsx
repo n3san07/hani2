@@ -1,0 +1,19 @@
+import React from "react";
+import "./Card.css";
+
+export const CssCard = ({ name, price, detail, image }) => {
+  return (
+    <div className="flexColStart r-card">
+      <img src={image} alt="home" />
+
+      <span className="secondaryText r-price">
+        <span style={{ color: "orange",paddingRight:"5px" }}>&#8362;</span>
+        <span>{price}</span>
+      </span>
+      <span className="primaryText">{name}</span>
+      <span className="secondaryText">{detail}</span>
+    </div>
+  );
+};
+
+
