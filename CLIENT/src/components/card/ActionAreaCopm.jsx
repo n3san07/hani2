@@ -7,7 +7,7 @@ import ROUTES from "../../routes/routesModel.js";
 
 const ActionAreaCopm = ({ card }) => {
   const nav = useNavigate();
-
+const newdd = 55
   return (
     <>
       <CardActionArea
