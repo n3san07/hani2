@@ -75,7 +75,7 @@ export const getResidency = asyncHandler(async (req, res) => {
 });
 
 export const DeleteResidency = asyncHandler(async (req, res) => {
-  const id = req.body.id;
+  const id = req.params["id"];
   if (!id) {
     res.status(404).json({ message: "no id found " });
   }

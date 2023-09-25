@@ -3,6 +3,7 @@ import UserModel from "../models/modelUsers.js";
 
 const authenticateToken = async (req, res, next) => {
   if (!req.header("Authorization")) {
+    console.log(req.header("Authorization"));
     return res.status(404).json({ message: "NO Authorization Found " });
   }
 

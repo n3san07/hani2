@@ -13,7 +13,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../../providers/Loading";
 import NotFound from "../../errorPage/Error";
-import { getEditP, sendEditD } from "../../../hooks/UseProperties";
+import { getEditP, sendEditD, deleteP } from "../../../hooks/UseProperties";
 import EditNoteRoundedIcon from "@mui/icons-material/EditNoteRounded";
 import ROUTES from "../../../routes/routesModel";
 const EditResidences = () => {
@@ -312,7 +312,8 @@ const EditResidences = () => {
                 sx={{ mt: 3 }}
                 onClick={async () => {
                   if (confirm("Are you sure you want to delete this?")) {
-                    console.log("yes");
+                    console.log(data?._id);
+                    deleteP(data?._id);
                   }
                 }}
               >

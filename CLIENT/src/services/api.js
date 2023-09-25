@@ -205,8 +205,7 @@ export const sendEditData = async (data) => {
 export const sendDelete = async (id) => {
   try {
     const res = await api.delete(
-      "/Residency/DeleteResidency",
-      { id },
+      `/Residency/DeleteResidency/${id}`,
       { headers }
     );
     if (
