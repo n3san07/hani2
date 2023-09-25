@@ -25,8 +25,6 @@ const CardButtonComp = ({ likedIDarray, card }) => {
     return UserDetails?.Email != card?.owner ? false : true;
   };
 
-  console.log(UserDetails);
-  console.log(card);
 
   return (
     <>
