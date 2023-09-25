@@ -314,6 +314,7 @@ const EditResidences = () => {
                   if (confirm("Are you sure you want to delete this?")) {
                     console.log(data?._id);
                     deleteP(data?._id);
+                    nav(`${ROUTES.MYRESIDENCES}`)
                   }
                 }}
               >
