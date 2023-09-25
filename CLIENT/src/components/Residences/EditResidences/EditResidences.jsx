@@ -305,6 +305,19 @@ const EditResidences = () => {
               >
                 Submit
               </Button>
+              <Button
+                variant="contained"
+                fullWidth
+                color="error"
+                sx={{ mt: 3 }}
+                onClick={async () => {
+                  if (confirm("Are you sure you want to delete this?")) {
+                    console.log("yes");
+                  }
+                }}
+              >
+                DELETE
+              </Button>
             </Grid>
           </Grid>
         </form>

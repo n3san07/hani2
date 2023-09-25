@@ -22,7 +22,7 @@ ResidencyRoutes.get("/getSwiperProperties", getSwiperProperties);
 ResidencyRoutes.post("/getMyResidences",authenticateToken, getMyResidences);
 ResidencyRoutes.post("/getFilterProperties", authenticateToken,getFilterProperties);
 ResidencyRoutes.get("/getResidency/:id", getResidency);
-ResidencyRoutes.delete("/DeleteResidency/:id", authenticateToken,DeleteResidency);
+ResidencyRoutes.delete("/DeleteResidency", authenticateToken,DeleteResidency);
 ResidencyRoutes.post("/getAllFavorite", authenticateToken,getAllFavorite);
 ResidencyRoutes.patch("/likeResidency/:id",authenticateToken, likeResidency);
 ResidencyRoutes.post("/checkLikeResidency",authenticateToken, getAllFavoriteToCheckLike);

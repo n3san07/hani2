@@ -201,6 +201,29 @@ export const sendEditData = async (data) => {
     throw error;
   }
 };
+
+export const sendDelete = async (id) => {
+  try {
+    const res = await api.delete(
+      "/Residency/DeleteResidency",
+      { id },
+      { headers }
+    );
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    toast.success("Deleted");
+  } catch (error) {
+    toast(error.response.data.message);
+    console.log(error);
+    throw error;
+  }
+};
+
 export const likePropertie = async (cardId, email) => {
   try {
     const res = await api.patch(

@@ -75,8 +75,10 @@ export const getResidency = asyncHandler(async (req, res) => {
 });
 
 export const DeleteResidency = asyncHandler(async (req, res) => {
-  const id = req.params["id"];
-
+  const id = req.body.id;
+  if (!id) {
+    res.status(404).json({ message: "no id found " });
+  }
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       res.status(404).json({ message: "no such Residency" });
@@ -85,7 +87,6 @@ export const DeleteResidency = asyncHandler(async (req, res) => {
     if (!deleteResidency) {
       res.status(404).json({ message: "no such Residency" });
     }
-
     res.status(200).json(deleteResidency);
   } catch (error) {
     res.status(404).json({ message: error._message });

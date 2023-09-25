@@ -9,8 +9,10 @@ import {
   getAllFavorite,
   sendEditData,
   likePropertie,
-  checkLikeProperties
+  checkLikeProperties,
+  sendDelete
 } from "../services/api";
+import { toast } from "react-toastify";
 
 export const getallP = () => {
   let { data, isError, isLoading, refetch } = useQuery({
@@ -22,9 +24,9 @@ export const getallP = () => {
   });
   return { data, isError, isLoading, refetch };
 };
-export const  checkLikeP = async  (email) => {
-const res =  await checkLikeProperties(email)
-return res
+export const checkLikeP = async (email) => {
+  const res = await checkLikeProperties(email);
+  return res;
 };
 export const getFillterd = (UrlQueryPrice, UrlQueryCity, UrlQuerystate) => {
   let { data, isError, isLoading, refetch } = useQuery({
@@ -111,4 +113,11 @@ export const getAllF = (email) => {
 export const likeP = (cardId, email) => {
   const res = likePropertie(cardId, email);
   return res;
+};
+export const deleteP = async (id) => {
+  try {
+    const res = await sendDelete(id);
+  } catch (error) {
+    console.error(error);
+  }
 };
