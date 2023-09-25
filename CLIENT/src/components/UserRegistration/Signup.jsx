@@ -22,11 +22,12 @@ export default function SignUp() {
     setError,
     formState: { errors },
   } = useForm();
-
+const nav = useNavigate()
   const onSubmit = async (data) => {
     try {
       const user = { ...data };
       const res = await UseSignUp(user);
+      nav(ROUTES.LOGIN)
     } catch (error) {
       if (error.response) {
         setError("email", {

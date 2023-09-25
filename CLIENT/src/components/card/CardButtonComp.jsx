@@ -47,23 +47,26 @@ const CardButtonComp = ({ likedIDarray, card }) => {
           icon={<ShowerIcon />}
           label={card.facilities.bathRoom}
         />
-        {isLiked ? (
-          <FavoriteSharpIcon
-          sx={{ color: "rgb(244,67,54)" }}
-
-            onClick={() => {
-              likeP(card?._id, UserDetails?.Email);
-              setisLiked(!isLiked);
-              
-            }}
-          />
-        ) : (
-          <FavoriteSharpIcon
-            onClick={() => {
-              likeP(card?._id, UserDetails?.Email);
-              setisLiked(!isLiked);
-            }}
-          />
+        {UserDetails && (
+          <span>
+            {" "}
+            {isLiked ? (
+              <FavoriteSharpIcon
+                sx={{ color: "rgb(244,67,54)" }}
+                onClick={() => {
+                  likeP(card?._id, UserDetails?.Email);
+                  setisLiked(!isLiked);
+                }}
+              />
+            ) : (
+              <FavoriteSharpIcon
+                onClick={() => {
+                  likeP(card?._id, UserDetails?.Email);
+                  setisLiked(!isLiked);
+                }}
+              />
+            )}{" "}
+          </span>
         )}
         {UserDetails?.Email == card?.owner ? (
           <EditIcon

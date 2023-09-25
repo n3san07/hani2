@@ -9,10 +9,13 @@ export const api = axios.create({
   baseURL: "https://houseappserver.vercel.app/api",
 });
 
-const token = checkUserFromLocalStorge()?.token;
+const getTokenandSetHeaders = () => {
+  const token = checkUserFromLocalStorge()?.token;
+  return token;
+};
 
 const headers = {
-  Authorization: `Bearer ${token}`,
+  Authorization: `Bearer ${getTokenandSetHeaders()}`,
 };
 
 export const getAllProperties = async () => {
@@ -88,9 +91,13 @@ export const getFilterProperties = async (
 
 export const getSinglePropertie = async (id) => {
   try {
-    const res = await api.get(`/Residency/getResidency/${id}`, {
-      timeout: 10 * 1000,
-    },{ headers });
+    const res = await api.get(
+      `/Residency/getResidency/${id}`,
+      {
+        timeout: 10 * 1000,
+      },
+      { headers }
+    );
 
     if (
       res.statusCode == 400 ||
@@ -131,7 +138,11 @@ export const getMyResidences = async (email) => {
 
 export const getAllFavorite = async (email) => {
   try {
-    const res = await api.post("/Residency/getAllFavorite", { email },{ headers });
+    const res = await api.post(
+      "/Residency/getAllFavorite",
+      { email },
+      { headers }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -148,7 +159,11 @@ export const getAllFavorite = async (email) => {
 
 export const addResidence = async (data) => {
   try {
-    const res = await api.post("/Residency/addResidency", { data },{ headers });
+    const res = await api.post(
+      "/Residency/addResidency",
+      { data },
+      { headers }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -166,7 +181,11 @@ export const addResidence = async (data) => {
 };
 export const sendEditData = async (data) => {
   try {
-    const res = await api.post("/Residency/editResidency", { data },{ headers });
+    const res = await api.post(
+      "/Residency/editResidency",
+      { data },
+      { headers }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -184,9 +203,13 @@ export const sendEditData = async (data) => {
 };
 export const likePropertie = async (cardId, email) => {
   try {
-    const res = await api.patch(`/Residency/likeResidency/${cardId}`, {
-      email,
-    },{ headers });
+    const res = await api.patch(
+      `/Residency/likeResidency/${cardId}`,
+      {
+        email,
+      },
+      { headers }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -204,7 +227,11 @@ export const likePropertie = async (cardId, email) => {
 };
 export const checkLikeProperties = async (email) => {
   try {
-    const res = await api.post("/Residency/checkLikeResidency", { email },{ headers });
+    const res = await api.post(
+      "/Residency/checkLikeResidency",
+      { email },
+      { headers }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||

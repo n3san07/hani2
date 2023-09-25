@@ -15,6 +15,7 @@ export const UseSignUp = async (user) => {
 export const UseLogIn = async (user) => {
   try {
     const data = await LoginUser(user);
+    console.log(data);
     await addUserToLoacalStorge(data);
     return await setUserToReactApp();
   } catch (error) {

@@ -35,7 +35,6 @@ const Header = () => {
     setMenuOpen(false);
   }, []);
   const { isDark, togleIsDark } = useTheme();
-
   return (
     <section className="h-wrapper" style={{ background: headerColor }}>
       <div className="flexCenter innerWidth paddings h-container">
