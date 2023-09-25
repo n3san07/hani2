@@ -21,6 +21,13 @@ const CardButtonComp = ({ likedIDarray, card }) => {
     }
   }, [setisLiked, likedIDarray]);
 
+  const checkIfCardforTheUser = () => {
+    return UserDetails?.Email != card?.owner ? false : true;
+  };
+
+  console.log(UserDetails);
+  console.log(card);
+
   return (
     <>
       <Box
@@ -47,7 +54,7 @@ const CardButtonComp = ({ likedIDarray, card }) => {
           icon={<ShowerIcon />}
           label={card.facilities.bathRoom}
         />
-        {UserDetails && (
+        {UserDetails && UserDetails?.Email != card?.owner ? (
           <span>
             {" "}
             {isLiked ? (
@@ -67,6 +74,8 @@ const CardButtonComp = ({ likedIDarray, card }) => {
               />
             )}{" "}
           </span>
+        ) : (
+          ""
         )}
         {UserDetails?.Email == card?.owner ? (
           <EditIcon
