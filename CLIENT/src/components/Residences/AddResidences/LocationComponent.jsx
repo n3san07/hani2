@@ -52,7 +52,7 @@ const LocationComponent = ({
       </Typography>
       {location ? (
         <Box>
-          <MyGoogleMap MapPosition={location} />
+          <MyGoogleMap  MapStyle={{ minWidth: "500px", height: "500px" }} MapPosition={location} />
         </Box>
       ) : (
         <Button

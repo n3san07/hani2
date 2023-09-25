@@ -37,7 +37,7 @@ const ResidenceDetails = () => {
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
 
   return (
-    <Paper>
+    <>
       <Paper>
         <Slideshow
           sx={{
@@ -149,7 +149,7 @@ const ResidenceDetails = () => {
                 elevation={3}
                 sx={{ padding: "2rem", textAlign: "center" }}
               >
-                <MyGoogleMap MapPosition={data?.MapPosition} />
+                <MyGoogleMap MapStyle={{ maxWidth: "500px", height: "500px" }} MapPosition={data?.MapPosition} />
               </Paper>
             </Grid>
           </Grid>
@@ -157,7 +157,7 @@ const ResidenceDetails = () => {
           <Divider sx={{ margin: "5rem 0" }} />
         </Container>
       </Paper>
-    </Paper>
+    </>
   );
 };
 

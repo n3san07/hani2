@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import Loading from "../../providers/Loading";
 import { Box } from "@mui/material";
-const MyGoogleMap = ({ MapPosition }) => {
+const MyGoogleMap = ({ MapPosition , MapStyle}) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_KEY,
@@ -13,7 +13,7 @@ const MyGoogleMap = ({ MapPosition }) => {
 
   return (
           <GoogleMap
-      mapContainerStyle={{ minWidth: "500px", height: "500px" }}
+      mapContainerStyle={MapStyle}
       zoom={MapPosition[2] || 9 }
       center={{
         lat: MapPosition[0] || 50,
