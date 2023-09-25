@@ -4,7 +4,7 @@ import "./Card.css";
 export const CssCard = ({ name, price, detail, image }) => {
   return (
     <div className="flexColStart r-card">
-      <img src={image} alt="home" />
+      <img style={{width:"230px",height:"230px"}} src={image} alt="home" />
 
       <span className="secondaryText r-price">
         <span style={{ color: "orange",paddingRight:"5px" }}>&#8362;</span>
