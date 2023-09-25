@@ -138,7 +138,7 @@ const ResidenceDetails = () => {
                   </Button>
                 </Box>
               ) : (
-                <Typography sx={{ mt: "4rem" }} variant="body1" color="initial">
+                <Typography sx={{ mt: "4rem" }} variant="body1" color="#ff9e45">
                   join Us For seller Details
                 </Typography>
               )}
