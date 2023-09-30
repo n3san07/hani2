@@ -307,7 +307,6 @@ export const LoginUser = async (user) => {
   }
 };
 export const getUserData = async (token) => {
-  console.log(token);
   try {
     const res = await api.get(`/Users/getUserData`, {
       headers: {
