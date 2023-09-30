@@ -10,4 +10,4 @@ const Logger = createLogger({
     ]
 })
 
-export default Logger
+export default Loggerr

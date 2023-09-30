@@ -1,6 +1,5 @@
 import axios from "axios";
-import dayjs from "dayjs";
-import { ToastContainer, toast } from "react-toastify";
+import {  toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
 /*export const api = axios.create({
   baseURL: "http://localhost:3001/api",
@@ -309,11 +308,9 @@ export const LoginUser = async (user) => {
   }
 };
 export const getUserData = async (token) => {
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+ 
   try {
-    const res = await api.get(`/Users/getUserData`, { headers });
+    const res = await api.get(`/Users/getUserData/${token}`, { headers });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
