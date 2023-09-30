@@ -102,20 +102,23 @@ export const LogIn = async (req, res) => {
 };
 export const getUserData = async (req, res) => {
   if (!req.header("Authorization")) {
-    console.log(req.header("Authorization"));
     return res.status(404).json({ message: "NO Authorization Found " });
   }
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
 
-  const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      // Handle invalid token
+  try {
+    const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        // Handle invalid token
+        return res.status(404).json({ message: "Invalid token" });
+      }
+      return decoded.AnalysedUsrer.id;
+    });
+    console.log("user uddddddddd", userId);
+    if (!userId) {
       return res.status(404).json({ message: "Invalid token" });
     }
-    return decoded.AnalysedUsrer.id;
-  });
 
-  try {
     const user = await UserModel.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });

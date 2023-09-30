@@ -23,7 +23,7 @@ const authenticateToken = async (req, res, next) => {
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ message: "Invalid token" });
     } else {
-      return res.status(401).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   }
 };
