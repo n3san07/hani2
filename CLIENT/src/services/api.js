@@ -1,12 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
-export const api = axios.create({
-  baseURL: "http://localhost:3001/api",
-});
 /*export const api = axios.create({
-  baseURL: "https://houseappserver.vercel.app/api",
+  baseURL: "http://localhost:3001/api",
 });*/
+export const api = axios.create({
+  baseURL: "https://houseappserver.vercel.app/api",
+});
 
 const getTokenandSetHeaders = () => {
   const token = checkUserFromLocalStorge()?.token;
@@ -308,7 +308,10 @@ export const LoginUser = async (user) => {
 export const getUserData = async (token) => {
   try {
     console.log(headers);
-    const res = await api.get(`/Users/getUserData`, { headers });
+    const res = await api.get(`/Users/getUserData`, { 
+      Authorization: `Bearer ${token}`,
+
+     });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
