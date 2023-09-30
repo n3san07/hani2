@@ -81,11 +81,13 @@ export default function ProfileMenu({ user, logout }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem disabled onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose;
+            nav(ROUTES.EDITUSERPROFILE);
+          }}
+        >
           <Avatar /> Profile
-        </MenuItem>
-        <MenuItem disabled onClick={handleClose}>
-          <Avatar /> My account
         </MenuItem>
         <Divider />
         <MenuItem
@@ -102,7 +104,7 @@ export default function ProfileMenu({ user, logout }) {
         <MenuItem
           onClick={() => {
             handleClose;
-            handleOpen()
+            handleOpen();
           }}
         >
           <ListItemIcon>

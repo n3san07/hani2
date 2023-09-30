@@ -20,7 +20,7 @@ import UserDetailsContext from "../../context/UserDetailsContext";
 
 const EditUserProfile = () => {
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
-  console.log(UserDetails?.Email);
+  console.log(UserDetails);
 
   const { control, handleSubmit, reset } = useForm({
     mode: "onTouched", // Validate on input touched
@@ -30,6 +30,7 @@ const EditUserProfile = () => {
       Address: UserDetails?.Address || "b",
       AboutMe: UserDetails?.AboutMe || "b",
       Phone: UserDetails?.Phone || "b",
+      Picture: UserDetails?.Picture || "https://via.placeholder.com/150",
     },
   });
   const [isEditing, setIsEditing] = useState(false);
@@ -63,12 +64,17 @@ const EditUserProfile = () => {
                 elevation={3}
                 sx={{ padding: "20px", position: "relative" }}
               >
-                <Avatar
-                  alt={UserDetails?.Name}
-                  src={
-                    UserDetails?.Picture || "https://via.placeholder.com/150"
-                  } // Placeholder image URL
-                  sx={{ width: 150, height: 150, margin: "0 auto 20px" }}
+                <Controller
+                  name="Picture"
+                  control={control}
+                  defaultValue="John"
+                  render={({ field }) => (
+                    <Avatar
+                      {...field}
+                      alt={UserDetails?.Name}
+                      sx={{ width: 150, height: 150, margin: "0 auto 20px" }}
+                    />
+                  )}
                 />
                 {!isEditing && (
                   <IconButton
@@ -85,7 +91,6 @@ const EditUserProfile = () => {
                   name="Name"
                   control={control}
                   rules={{ required: "Name is required" }}
-                  defaultValue="John"
                   render={({ field }) => (
                     <TextField
                       {...field}
