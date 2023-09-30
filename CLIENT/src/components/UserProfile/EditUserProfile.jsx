@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import UserDetailsContext from "../../context/UserDetailsContext";
-
+import { UseEditUserData } from "../../hooks/UseUser";
 const EditUserProfile = () => {
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
   console.log(UserDetails);
@@ -35,8 +35,9 @@ const EditUserProfile = () => {
   });
   const [isEditing, setIsEditing] = useState(false);
   // stil not workking
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const res = await UseEditUserData(data);
     setIsEditing(false);
   };
 

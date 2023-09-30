@@ -126,3 +126,8 @@ export const getUserData = async (req, res) => {
     }
   }
 };
+export const EditUserData = async (req, res) => {
+  if (req.body) {
+    res.send(JSON.stringify(req.body));
+  }
+};

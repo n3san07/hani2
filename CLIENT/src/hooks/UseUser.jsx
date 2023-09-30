@@ -1,5 +1,10 @@
 import React from "react";
-import { CreactUser, LoginUser, getUserData } from "../services/api";
+import {
+  CreactUser,
+  LoginUser,
+  getUserData,
+  sendEditUserData,
+} from "../services/api";
 import {
   addUserToLoacalStorge,
   deleteUserFromLocalStorge,
@@ -42,6 +47,14 @@ export const setUserToReactApp = async () => {
     const token = await checkUserFromLocalStorge()?.token;
     const user = await UseUserData(token);
     return user;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const UseEditUserData = async (data) => {
+  try {
+    const res = await sendEditUserData(data);
+    return res;
   } catch (error) {
     console.log(error);
   }

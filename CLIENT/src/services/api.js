@@ -326,3 +326,24 @@ export const getUserData = async (token) => {
     throw error;
   }
 };
+
+export const sendEditUserData = async (data) => {
+  try {
+    const res = await api.post(
+      "/Users/EditUserData",
+      { data },
+      { headers }
+    );
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
