@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useForm } from "react-hook-form";
-import { UseLogIn, setUserToReactApp } from "../../hooks/UseUser";
+import { UseLogIn } from "../../hooks/UseUser";
 import { useContext } from "react";
 import UserDetailsContext from "../../context/UserDetailsContext";
 import { useNavigate } from "react-router-dom";

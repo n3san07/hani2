@@ -1,5 +1,5 @@
 import axios from "axios";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
 /*export const api = axios.create({
   baseURL: "http://localhost:3001/api",
@@ -16,7 +16,6 @@ const getTokenandSetHeaders = () => {
 const headers = {
   Authorization: `Bearer ${getTokenandSetHeaders()}`,
 };
-
 export const getAllProperties = async () => {
   try {
     const res = await api.get("/Residency/getallResidency", {
@@ -203,10 +202,9 @@ export const sendEditData = async (data) => {
 
 export const sendDelete = async (id) => {
   try {
-    const res = await api.delete(
-      `/Residency/DeleteResidency/${id}`,
-      { headers }
-    );
+    const res = await api.delete(`/Residency/DeleteResidency/${id}`, {
+      headers,
+    });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -308,9 +306,9 @@ export const LoginUser = async (user) => {
   }
 };
 export const getUserData = async (token) => {
- 
   try {
-    const res = await api.get(`/Users/getUserData/${token}`, { headers });
+    console.log(headers);
+    const res = await api.get(`/Users/getUserData`, { headers });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
