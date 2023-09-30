@@ -1,7 +1,10 @@
 import React from "react";
 import { CreactUser, LoginUser, getUserData } from "../services/api";
-import { addUserToLoacalStorge } from "../services/LocalStorge";
-import { checkUserFromLocalStorge } from "../services/LocalStorge";
+import {
+  addUserToLoacalStorge,
+  deleteUserFromLocalStorge,
+  checkUserFromLocalStorge,
+} from "../services/LocalStorge";
 
 export const UseSignUp = async (user) => {
   try {
@@ -14,10 +17,11 @@ export const UseSignUp = async (user) => {
 
 export const UseLogIn = async (user) => {
   try {
+    await deleteUserFromLocalStorge();
     const data = await LoginUser(user);
-    console.log(data);
     await addUserToLoacalStorge(data);
-    return await setUserToReactApp();
+     await setUserToReactApp();
+     return
   } catch (error) {
     console.log(error);
   }
