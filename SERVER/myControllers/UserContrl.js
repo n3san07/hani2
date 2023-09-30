@@ -102,7 +102,7 @@ export const LogIn = async (req, res) => {
 };
 export const getUserData = async (req, res) => {
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
-
+  console.log(token);
   const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
       // Handle invalid token
