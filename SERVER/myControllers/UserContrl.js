@@ -102,21 +102,15 @@ export const LogIn = async (req, res) => {
 };
 export const getUserData = async (req, res) => {
   if (!req.header("Authorization")) {
-    return res.status(404).json({ message: "NO Authorization Found " });
+    return res.status(404).json({ message: "No Authorization Found" });
   }
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
 
   try {
-    const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
-      if (err) {
-        // Handle invalid token
-        return res.status(404).json({ message: "Invalid token" });
-      }
-      return decoded.AnalysedUsrer.id;
-    });
-    console.log("user uddddddddd", userId);
+    const decoded = jwt.verify(token, process.env.SECRET);
+    const userId = decoded.AnalysedUsrer.id;
     if (!userId) {
-      return res.status(404).json({ message: "Invalid token" });
+      return res.status(404).json({ message: "Invalid token1" });
     }
 
     const user = await UserModel.findById(userId);
@@ -126,7 +120,7 @@ export const getUserData = async (req, res) => {
     res.status(200).json({ user });
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
-      return res.status(401).json({ message: "Invalid token" });
+      return res.status(401).json({ message: "Invalid token2" });
     } else {
       return res.status(401).json({ error: error.message });
     }
