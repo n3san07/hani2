@@ -16,6 +16,7 @@ const getTokenandSetHeaders = () => {
 const headers = {
   Authorization: `Bearer ${getTokenandSetHeaders()}`,
 };
+
 export const getAllProperties = async () => {
   try {
     const res = await api.get("/Residency/getallResidency", {
@@ -306,8 +307,13 @@ export const LoginUser = async (user) => {
   }
 };
 export const getUserData = async (token) => {
+  console.log(token);
   try {
-    const res = await api.get(`/Users/getUserData`, { headers });
+    const res = await api.get(`/Users/getUserData`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
