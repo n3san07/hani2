@@ -104,7 +104,7 @@ const Header = () => {
         <span className="menu-icon">
           <Box>
             {UserDetails && (
-              <Box sx={{ pr: 6 }}>
+              <Box sx={{ pr:"2px" }}>
                 <ProfileMenu user={UserDetails} logout={logout} />
               </Box>
             )}
