@@ -307,11 +307,7 @@ export const LoginUser = async (user) => {
 };
 export const getUserData = async (token) => {
   try {
-    console.log(headers);
-    const res = await api.get(`/Users/getUserData`, { 
-      Authorization: `Bearer ${token}`,
-
-     });
+    const res = await api.get(`/Users/getUserData`, { headers });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
