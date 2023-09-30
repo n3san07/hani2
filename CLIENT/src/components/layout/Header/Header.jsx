@@ -134,6 +134,7 @@ const Header = () => {
                   size="large"
                   color="warning"
                   onClick={() => {
+                    setOpen(false);
                     navigate(ROUTES.ROOT);
                   }}
                   variant="contained"
@@ -144,6 +145,8 @@ const Header = () => {
               <ListItemButton>
                 <Button
                   onClick={() => {
+                    setOpen(false);
+
                     navigate(ROUTES.RESIDENCES);
                   }}
                   variant="contained"
