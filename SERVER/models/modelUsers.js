@@ -18,6 +18,18 @@ const userSchema = mongoose.Schema(
       type: String,
       default: "",
     },
+    Address:{
+      type: String,
+      default: "",
+    },
+    AboutMe:{
+      type: String,
+      default: "",
+    },
+    Phone:{
+      type: Number,
+      default: "",
+    },
     isBusiness: {
       type: Boolean,
       default: false,

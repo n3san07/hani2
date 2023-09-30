@@ -49,7 +49,7 @@ export const AppThemePrvoider = ({ children }) => {
       mode: isDark ? `dark` : `light`,
       primary: {
         // Purple and green play nicely together.
-        main: "#7DA2A9",
+        main: "#FF9E45",
       },
       secondary: {
         // This is green.A700 as hex.
