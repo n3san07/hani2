@@ -101,9 +101,31 @@ export const LogIn = async (req, res) => {
   }
 };
 export const getUserData = async (req, res) => {
+  if (!req.header("Authorization")) {
+    console.log(req.header("Authorization"));
+    return res.status(404).json({ message: "NO Authorization Found " });
+  }
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
-  console.log(token);
-  if (token) {
-    res.send(token);
+
+  const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    if (err) {
+      // Handle invalid token
+      return res.status(404).json({ message: "Invalid token" });
+    }
+    return decoded.AnalysedUsrer.id;
+  });
+
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "Invalid user" });
+    }
+    res.status(200).json({ user });
+  } catch (error) {
+    if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({ message: "Invalid token" });
+    } else {
+      return res.status(500).json({ error: error.message });
+    }
   }
 };
