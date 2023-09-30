@@ -103,21 +103,7 @@ export const LogIn = async (req, res) => {
 export const getUserData = async (req, res) => {
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
   console.log(token);
-  const userId = jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      // Handle invalid token
-      return res.status(404).json({ message: "Invalid token" });
-    }
-    return decoded.AnalysedUsrer.id;
-  });
-
-  try {
-    const user = await UserModel.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: "Invalid user" });
-    }
-    res.status(200).json({ user });
-  } catch (error) {
-    res.status(404).json({ error: error.message });
+  if (token) {
+    res.send(token);
   }
 };
