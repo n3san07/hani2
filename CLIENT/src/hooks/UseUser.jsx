@@ -20,13 +20,11 @@ export const UseLogIn = async (user) => {
     await deleteUserFromLocalStorge();
     const data = await LoginUser(user);
     await addUserToLoacalStorge(data);
-     await setUserToReactApp();
-     return
+    return await setUserToReactApp();
   } catch (error) {
     console.log(error);
   }
 };
-
 export const UseUserData = async (token) => {
   try {
     const data = await getUserData(token);
