@@ -329,11 +329,7 @@ export const getUserData = async (token) => {
 
 export const sendEditUserData = async (data) => {
   try {
-    const res = await api.post(
-      "/Users/EditUserData",
-      { data },
-      { headers }
-    );
+    const res = await api.post("/Users/EditUserData", { data }, { headers });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||

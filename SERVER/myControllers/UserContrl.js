@@ -18,12 +18,18 @@ const creatToken = (user) => {
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/;
 const EmailRegex =
   /(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
+const phoneNumberRegex = /^[0-9]{10}$/;
+
+// Function to validate a phone number
 
 function validatePassword(x) {
   return passwordRegex.test(x);
 }
 function validateEmail(x) {
   return EmailRegex.test(x);
+}
+function isValidPhoneNumber(x) {
+  return phoneNumberRegex.test(x);
 }
 
 export const Register = asyncHandler(async (req, res) => {
@@ -60,7 +66,7 @@ export const Register = asyncHandler(async (req, res) => {
     res.status(201).json({ token });
   } catch (error) {
     console.log(error);
-    return res.status(404).json({ error });
+    res.status(404).json({ message: error.message });
   }
 });
 
@@ -97,7 +103,7 @@ export const LogIn = async (req, res) => {
 
     res.status(200).json({ token });
   } catch (error) {
-    res.status(404).json({ error: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 export const getUserData = async (req, res) => {
@@ -122,12 +128,67 @@ export const getUserData = async (req, res) => {
     if (error.name === "JsonWebTokenError") {
       return res.status(401).json({ message: "Invalid token2" });
     } else {
-      return res.status(401).json({ error: error.message });
+      res.status(404).json({ message: error.message });
     }
   }
 };
 export const EditUserData = async (req, res) => {
-  if (req.body) {
-    res.send(JSON.stringify(req.body));
+  if (!req.body) {
+    return res.status(401).json({ message: "no data found" });
+  }
+  const { Name, Email, Address, AboutMe, Phone, Picture, oldEmail } =
+    req.body.data;
+  if (!validateEmail(Email)) {
+    return res.status(404).json({ message: "Email validaiton gone wrong" });
+  }
+  if (!oldEmail) {
+    return res.status(404).json({ message: "no user found" });
+  }
+  if (!validateEmail(Email)) {
+    return res.status(404).json({ message: "Email validaiton gone wrong" });
+  }
+  if (!isValidPhoneNumber(Phone)) {
+    return res.status(404).json({ message: "Phone validaiton gone wrong" });
+  }
+  const defaultName = Name || " Name";
+  const defaultEmail = Email || " Email";
+  const defaultAddress = Address || " Address";
+  const defaultAboutMe = AboutMe || " About Me";
+  const defaultPhone = Phone || 0;
+  const defaultPicture = Picture || " Picture";
+
+  const updatedValues = {
+    Name: defaultName,
+    Email: defaultEmail,
+    Address: defaultAddress,
+    AboutMe: defaultAboutMe,
+    Phone: defaultPhone,
+    Picture: defaultPicture,
+  };
+  try {
+    const user = await UserModel.findOne({ Email: oldEmail });
+    if (!user) {
+      return res.status(404).json({ message: "no user found" });
+    }
+    const checkifuserexist = await UserModel.findOne({ Email });
+    if (checkifuserexist) {
+      return res.status(404).json({ message: "this Email is already in use" });
+    }
+    const userId = user._id.toString();
+    const final = await UserModel.findByIdAndUpdate(userId, updatedValues);
+    if (!final) {
+      res.status(404).json({ message: "somtheing went wrong" });
+      return;
+    }
+    const newData = await UserModel.findOne({ Email: Email });
+    if (!newData) {
+      res.status(404).json({ message: "somtheing went wrong" });
+      return;
+    }
+
+    const token = creatToken(newData._id);
+    res.status(200).json({ user: newData, token: token });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 };

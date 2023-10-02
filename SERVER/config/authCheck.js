@@ -14,6 +14,7 @@ const authenticateToken = async (req, res, next) => {
     const userId = decoded.AnalysedUsrer.id;
 
     const user = await UserModel.findById(userId);
+
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }

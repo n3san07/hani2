@@ -13,6 +13,7 @@ import {
 
 export const UseSignUp = async (user) => {
   try {
+    await deleteUserFromLocalStorge();
     const data = await CreactUser(user);
     return data;
   } catch (error) {
@@ -54,6 +55,13 @@ export const setUserToReactApp = async () => {
 export const UseEditUserData = async (data) => {
   try {
     const res = await sendEditUserData(data);
+    if (res?.token) {
+      deleteUserFromLocalStorge();
+      const x = {
+        token: res.token,
+      };
+      addUserToLoacalStorge(x);
+    }
     return res;
   } catch (error) {
     console.log(error);

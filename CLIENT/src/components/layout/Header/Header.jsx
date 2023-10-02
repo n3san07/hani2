@@ -13,7 +13,6 @@ import NightlightIcon from "@mui/icons-material/Nightlight";
 import IconButton from "@mui/material/IconButton";
 import { useTheme } from "../../../providers/Thems";
 import "./Header.css";
-import { Link } from "react-router-dom";
 import { Drawer } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
@@ -22,7 +21,6 @@ const Header = () => {
   const navigate = useNavigate();
 
   const { setUserDetails, UserDetails } = useContext(UserDetailsContext);
-
   const logout = () => {
     deleteUserFromLocalStorge();
     setUserDetails(null);

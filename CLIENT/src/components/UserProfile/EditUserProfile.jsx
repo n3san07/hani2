@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   Button,
@@ -18,9 +18,35 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import UserDetailsContext from "../../context/UserDetailsContext";
 import { UseEditUserData } from "../../hooks/UseUser";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
+
 const EditUserProfile = () => {
+  const nav = useNavigate();
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
-  console.log(UserDetails);
+  const [img, setimg] = useState(
+    UserDetails?.Picture ||
+      "https://cdn.pixabay.com/photo/2023/09/11/13/08/dog-8246868_1280.jpg"
+  );
+
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dxfc1owsn",
+        uploadPreset: "ofwwpdqg",
+        maxFiles: 3,
+      },
+      (err, result) => {
+        if (result.event === "success") {
+          setimg(result.info.secure_url);
+        }
+      }
+    );
+  }, []);
 
   const { control, handleSubmit, reset } = useForm({
     mode: "onTouched", // Validate on input touched
@@ -30,15 +56,28 @@ const EditUserProfile = () => {
       Address: UserDetails?.Address || "b",
       AboutMe: UserDetails?.AboutMe || "b",
       Phone: UserDetails?.Phone || "b",
-      Picture: UserDetails?.Picture || "https://via.placeholder.com/150",
     },
   });
   const [isEditing, setIsEditing] = useState(false);
+
   // stil not workking
   const onSubmit = async (data) => {
-    console.log(data);
-    const res = await UseEditUserData(data);
-    setIsEditing(false);
+    try {
+      const res = await UseEditUserData({
+        ...data,
+        Picture: img,
+        oldEmail: UserDetails?.Email,
+      });
+
+      if (res) {
+        setUserDetails(res?.user);
+        nav(ROUTES.ROOT);
+      }
+      setIsEditing(false);
+      navigator;
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const toggleEdit = () => {
@@ -72,8 +111,10 @@ const EditUserProfile = () => {
                   render={({ field }) => (
                     <Avatar
                       {...field}
+                      src={img}
                       alt={UserDetails?.Name}
                       sx={{ width: 150, height: 150, margin: "0 auto 20px" }}
+                      onClick={() => widgetRef.current?.open()}
                     />
                   )}
                 />

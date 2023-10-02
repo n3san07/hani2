@@ -3,9 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -29,10 +26,15 @@ export default function SignUp() {
 
   const onSubmit = async (data) => {
     try {
+      // dont need it just for extra protection
+      if (localStorage.getItem("user")) {
+        localStorage.removeItem("user");
+      }
+      await setUserDetails(null);
       const user = { ...data };
       const res = await UseLogIn(user);
-      setUserDetails(res);
-      navigate(ROUTES.ROOT)
+      await setUserDetails(res);
+      navigate(ROUTES.ROOT);
     } catch (error) {
       if (error.response) {
         setError("email", {
@@ -113,7 +115,6 @@ export default function SignUp() {
                   })}
                 />
               </Grid>
-          
             </Grid>
             <Button
               type="submit"
@@ -125,7 +126,13 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Typography sx={{cursor:"pointer"}} onClick={()=>{navigate(ROUTES.SIGNUP)}}  variant="body2">
+                <Typography
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => {
+                    navigate(ROUTES.SIGNUP);
+                  }}
+                  variant="body2"
+                >
                   dont have account? Sign up
                 </Typography>
                 {errors.email && <p>{errors.email.message}</p>}
