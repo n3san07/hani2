@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
 /*export const api = axios.create({
   baseURL: "http://localhost:3001/api",
-});*/
+})*/
 export const api = axios.create({
   baseURL: "https://houseappserver.vercel.app/api",
 });
@@ -337,8 +337,10 @@ export const sendEditUserData = async (data) => {
     ) {
       throw res.data;
     }
+    toast.success("Edited was successful");
     return res.data;
   } catch (error) {
+    toast.error(error.response.data.message);
     console.log(error);
     throw error;
   }

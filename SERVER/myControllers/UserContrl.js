@@ -150,6 +150,7 @@ export const EditUserData = async (req, res) => {
   if (!isValidPhoneNumber(Phone)) {
     return res.status(404).json({ message: "Phone validaiton gone wrong" });
   }
+
   const defaultName = Name || " Name";
   const defaultEmail = Email || " Email";
   const defaultAddress = Address || " Address";
@@ -170,10 +171,15 @@ export const EditUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "no user found" });
     }
-    const checkifuserexist = await UserModel.findOne({ Email });
-    if (checkifuserexist) {
-      return res.status(404).json({ message: "this Email is already in use" });
+    if (oldEmail != Email) {
+      const checkifuserexist = await UserModel.findOne({ Email });
+      if (checkifuserexist) {
+        return res
+          .status(404)
+          .json({ message: "this Email is already in use" });
+      }
     }
+
     const userId = user._id.toString();
     const final = await UserModel.findByIdAndUpdate(userId, updatedValues);
     if (!final) {

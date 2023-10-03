@@ -18,7 +18,6 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import UserDetailsContext from "../../context/UserDetailsContext";
 import { UseEditUserData } from "../../hooks/UseUser";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 
@@ -27,7 +26,7 @@ const EditUserProfile = () => {
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
   const [img, setimg] = useState(
     UserDetails?.Picture ||
-      "https://cdn.pixabay.com/photo/2023/09/11/13/08/dog-8246868_1280.jpg"
+      "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
   );
 
   const cloudinaryRef = useRef();
@@ -48,14 +47,19 @@ const EditUserProfile = () => {
     );
   }, []);
 
-  const { control, handleSubmit, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
     mode: "onTouched", // Validate on input touched
     defaultValues: {
-      Name: UserDetails?.Name || "b",
-      Email: UserDetails?.Email || "b",
-      Address: UserDetails?.Address || "b",
-      AboutMe: UserDetails?.AboutMe || "b",
-      Phone: UserDetails?.Phone || "b",
+      Name: UserDetails?.Name || "",
+      Email: UserDetails?.Email || "",
+      Address: UserDetails?.Address || "",
+      AboutMe: UserDetails?.AboutMe || "",
+      Phone: UserDetails?.Phone || "",
     },
   });
   const [isEditing, setIsEditing] = useState(false);
@@ -86,7 +90,7 @@ const EditUserProfile = () => {
       reset();
     }
   };
-
+  console.log(errors);
   return (
     <Paper sx={{ minHeight: "70vh" }}>
       <Container maxWidth="xl">
@@ -114,7 +118,11 @@ const EditUserProfile = () => {
                       src={img}
                       alt={UserDetails?.Name}
                       sx={{ width: 150, height: 150, margin: "0 auto 20px" }}
-                      onClick={() => widgetRef.current?.open()}
+                      onClick={() => {
+                        if (isEditing) {
+                          widgetRef.current?.open();
+                        }
+                      }}
                     />
                   )}
                 />
@@ -149,15 +157,23 @@ const EditUserProfile = () => {
                   name="Phone"
                   control={control}
                   defaultValue="0522613459"
-                  rules={{ required: "Phone is required" }}
+                  rules={{
+                    required: "Phone number is required",
+                    pattern: {
+                      value: /^[0-9]{10}$/,
+                      message: "Invalid phone number (10 digits only)",
+                    },
+                  }}
                   render={({ field }) => (
                     <TextField
                       {...field}
                       label="Phone"
                       fullWidth
                       variant="outlined"
-                      disabled={!isEditing}
                       margin="normal"
+                      disabled={!isEditing}
+                      error={Boolean(errors.Phone)}
+                      helperText={errors.Phone?.message}
                     />
                   )}
                 />
@@ -165,7 +181,14 @@ const EditUserProfile = () => {
                   name="Email"
                   control={control}
                   defaultValue={UserDetails?.Email || ""}
-                  rules={{ required: "Email is required" }}
+                  rules={{
+                    required: "Email is required",
+                    pattern: {
+                      value:
+                        /(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i,
+                      message: " Invalid Email ",
+                    },
+                  }}
                   render={({ field }) => (
                     <TextField
                       {...field}
@@ -174,18 +197,11 @@ const EditUserProfile = () => {
                       variant="outlined"
                       disabled={!isEditing}
                       margin="normal"
+                      error={Boolean(errors.Email)}
+                      helperText={errors.Email?.message}
                     />
                   )}
                 />
-                {isEditing && (
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    style={{ marginTop: "20px" }}
-                  >
-                    Save
-                  </Button>
-                )}
               </Paper>
             </Grid>
 
@@ -232,8 +248,15 @@ const EditUserProfile = () => {
                     />
                   )}
                 />
-
-                <Divider sx={{ my: 2 }} />
+                {isEditing && (
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{ marginTop: "20px" }}
+                  >
+                    Save
+                  </Button>
+                )}
               </Paper>
             </Grid>
           </Grid>
