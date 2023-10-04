@@ -10,7 +10,8 @@ import {
   sendEditData,
   likePropertie,
   checkLikeProperties,
-  sendDelete
+  sendDelete,
+  getInfo
 } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -117,6 +118,14 @@ export const likeP = (cardId, email) => {
 export const deleteP = async (id) => {
   try {
     const res = await sendDelete(id);
+  } catch (error) {
+    console.error(error);
+  }
+};
+export const getSellerInfo = async (email) => {
+  try {
+    const res = await getInfo(email);
+    return res
   } catch (error) {
     console.error(error);
   }

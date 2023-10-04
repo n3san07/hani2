@@ -198,3 +198,21 @@ export const EditUserData = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
+
+export const getSellerInfo = async (req, res) => {
+  const Email = req.body.email
+  console.log(req.body);
+  if (!Email) {
+    res.status(404).json({ message: "no email found" });
+  }
+  try {
+    const user = await UserModel.findOne({ Email: Email });
+    if (!user) {
+      return res.status(404).json({ message: "Invalid user" });
+    }
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+
+  }
+}

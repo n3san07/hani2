@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import NotFound from "../../errorPage/Error";
 import Loading from "../../../providers/Loading";
-import { getSingleP } from "../../../hooks/UseProperties";
+import { getSingleP, getSellerInfo } from "../../../hooks/UseProperties";
 import Slideshow from "../../Slideshow/Slideshow";
 import CallIcon from "@mui/icons-material/Call";
 import {
@@ -22,6 +22,7 @@ import MyGoogleMap from "../../MyGoogleMap/MyGoogleMap";
 import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import UserDetailsContext from "../../../context/UserDetailsContext";
+import BioCard from "../../../providers/BioCard";
 const ResidenceDetails = () => {
   const { id } = useParams();
   const { data, isError, isLoading, refetch } = getSingleP(id);
@@ -36,6 +37,12 @@ const ResidenceDetails = () => {
 
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
 
+  const SellerInfo = {}
+
+  if (data) {
+    SellerInfo = getSellerInfo(data?.owner)
+  }
+  console.log("final",SellerInfo);
   return (
     <>
       <Paper>

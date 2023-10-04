@@ -345,3 +345,21 @@ export const sendEditUserData = async (data) => {
     throw error;
   }
 };
+export const getInfo = async (data) => {
+  try {
+    const res = await api.post("/Users/getSellerInfo", { data }, { headers });
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    console.log("res",res);
+    return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message);
+    console.log(error);
+    throw error;
+  }
+};
