@@ -5,7 +5,7 @@ import authenticateToken from "../config/authCheck.js";
 
 usersRoutes.post("/register", Register);
 usersRoutes.post("/login", LogIn);
-usersRoutes.get("/getUserData", getUserData);
+usersRoutes.get("/getUserData",authenticateToken, getUserData);
 usersRoutes.post("/EditUserData",authenticateToken, EditUserData);
 
 
