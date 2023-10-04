@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import NotFound from "../../errorPage/Error";
@@ -37,12 +37,22 @@ const ResidenceDetails = () => {
 
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
 
-  const SellerInfo = {}
+  const [SellerInfo, SetSellerInfo] = useState({})
 
-  if (data) {
-    SellerInfo = getSellerInfo(data?.owner)
+  const getSellerdata = async () => {
+    return await getSellerInfo(data?.owner)
   }
-  console.log("final",SellerInfo);
+
+  useEffect(() => {
+
+    if (data.owner) {
+      let x = getSellerdata()
+      SetSellerInfo(x)
+    }
+
+  }, [UserDetails])
+
+  console.log("final", SellerInfo);
   return (
     <>
       <Paper>

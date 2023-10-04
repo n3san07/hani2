@@ -200,7 +200,7 @@ export const EditUserData = async (req, res) => {
 };
 
 export const getSellerInfo = async (req, res) => {
-  const Email = req.body.email
+  const Email = req.body.data
   console.log(req.body);
   if (!Email) {
     res.status(404).json({ message: "no email found" });
