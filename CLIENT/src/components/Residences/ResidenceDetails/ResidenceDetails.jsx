@@ -42,15 +42,10 @@ const ResidenceDetails = () => {
   const getSellerdata = async () => {
     return await getSellerInfo(data?.owner)
   }
-
-  useEffect(() => {
-
-    if (data.owner) {
-      let x = getSellerdata()
-      SetSellerInfo(x)
-    }
-
-  }, [UserDetails])
+  if (data?.owner) {
+    let x = getSellerdata()
+    SetSellerInfo(x)
+  }
 
   console.log("final", SellerInfo);
   return (
