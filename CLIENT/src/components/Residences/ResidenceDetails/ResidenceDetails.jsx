@@ -37,15 +37,8 @@ const ResidenceDetails = () => {
 
   const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
 
-  const [SellerInfo, SetSellerInfo] = useState({})
+  const SellerInfo = getSellerInfo(data?.owner)
 
-  const getSellerdata = async () => {
-    return await getSellerInfo(data?.owner)
-  }
-  if (data?.owner) {
-    let x = getSellerdata()
-    SetSellerInfo(x)
-  }
 
   console.log("final", SellerInfo);
   return (
