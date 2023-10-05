@@ -11,7 +11,7 @@ import {
   likePropertie,
   checkLikeProperties,
   sendDelete,
-  getInfo
+  getInfo,
 } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -122,11 +122,6 @@ export const deleteP = async (id) => {
     console.error(error);
   }
 };
-export const getSellerInfo = async (email) => {
-  try {
-    const res = await getInfo(email);
-    return res
-  } catch (error) {
-    console.error(error);
-  }
+export const getSellerInfo = (email) => {
+  return getInfo(email);
 };

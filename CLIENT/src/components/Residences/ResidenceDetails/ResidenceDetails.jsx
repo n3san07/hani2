@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import NotFound from "../../errorPage/Error";
 import Loading from "../../../providers/Loading";
-import { getSingleP, getSellerInfo } from "../../../hooks/UseProperties";
+import { getSingleP } from "../../../hooks/UseProperties";
 import Slideshow from "../../Slideshow/Slideshow";
 import CallIcon from "@mui/icons-material/Call";
 import {
@@ -14,6 +14,7 @@ import {
   Button,
   Divider,
   Box,
+  Avatar,
 } from "@mui/material";
 import LocalParkingIcon from "@mui/icons-material/LocalParking";
 import HotelIcon from "@mui/icons-material/Hotel";
@@ -23,10 +24,12 @@ import SquareFootIcon from "@mui/icons-material/SquareFoot";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import UserDetailsContext from "../../../context/UserDetailsContext";
 import BioCard from "../../../providers/BioCard";
+import { getInfo } from "../../../services/api";
 const ResidenceDetails = () => {
   const { id } = useParams();
   const { data, isError, isLoading, refetch } = getSingleP(id);
-
+  const { UserDetails } = useContext(UserDetailsContext);
+  const [info, setinfo] = useState();
   if (isLoading) {
     return <Loading />;
   }
@@ -35,12 +38,18 @@ const ResidenceDetails = () => {
     return <NotFound />;
   }
 
-  const { UserDetails, setUserDetails } = useContext(UserDetailsContext);
-
-  const SellerInfo = getSellerInfo(data?.owner)
-
-
-  console.log("final", SellerInfo);
+  const getSellerInfo = async () => {
+    try {
+      return await getInfo(data?.owner).then((res) => {
+        setinfo(res.user);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (!info) {
+    getSellerInfo();
+  }
   return (
     <>
       <Paper>
@@ -134,11 +143,17 @@ const ResidenceDetails = () => {
                   <Button
                     size="large"
                     variant="outlined"
-                    href="tel:0549966867"
+                    href={`tel:0${data?.phone}`}
                     component={"a"}
                   >
-                    {" "}
-                    <CallIcon />
+                    <Avatar
+                      sx={{ width: 32, height: 32,mr:2 }}
+                      alt={info?.Name}
+                      src={
+                        info?.Picture ||
+                        "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                      }
+                    />
                     &nbsp;&nbsp; {data?.ownerName}{" "}
                   </Button>
                 </Box>
@@ -154,7 +169,10 @@ const ResidenceDetails = () => {
                 elevation={3}
                 sx={{ padding: "2rem", textAlign: "center" }}
               >
-                <MyGoogleMap MapStyle={{ maxWidth: "500px", height: "500px" }} MapPosition={data?.MapPosition} />
+                <MyGoogleMap
+                  MapStyle={{ maxWidth: "500px", height: "500px" }}
+                  MapPosition={data?.MapPosition}
+                />
               </Paper>
             </Grid>
           </Grid>

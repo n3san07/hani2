@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-  AccordionItemState,
-} from "react-accessible-accordion";
-import "react-accessible-accordion/dist/fancy-example.css";
-import {
-  MdOutlineArrowDropDown,
-  MdOutlineArrowDropDownCircle,
-} from "react-icons/md";
 import data from "../../utils/accordion.jsx";
 import "./Value.css";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Lottie from "lottie-react";
 import AnimationData from "./animation_lmx6nlhl.json";
 import { Paper } from "@mui/material";
@@ -25,7 +17,7 @@ const Value = () => {
       <Paper className="paddings innerWidth flexCenter v-container">
         {/* left side */}
         <div className="v-left">
-          <div >
+          <div>
             <Lottie animationData={AnimationData} />
           </div>
         </div>
@@ -41,44 +33,24 @@ const Value = () => {
             <br />
             We beleive a good blace to live can make your life better
           </span>
-
-          <Accordion
-            className="accordion"
-            allowMultipleExpanded={false}
-            preExpanded={[0]}
-          >
-            {data.map((item, i) => {
-              const [className, setClassName] = useState(null);
-              return (
-                <AccordionItem
-                  className={`accordionItem ${className}`}
-                  uuid={i}
-                  key={i}
+          <Paper color="primary"  elevation={8}>
+            {data?.map((x, i) => (
+              <Accordion sx={{padding:"10px 50px"}} key={x.heading} transition="0.2s ease">
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  <AccordionItemHeading>
-                    <AccordionItemButton className="flexCenter accordionButton ">
-                      {/* just for getting state of item */}
-                      <AccordionItemState>
-                        {({ expanded }) =>
-                          expanded
-                            ? setClassName("expanded")
-                            : setClassName("collapsed")
-                        }
-                      </AccordionItemState>
-                      <div className="flexCenter icon">{item.icon}</div>
-                      <span className="primaryText">{item.heading}</span>
-                      <div className="flexCenter icon">
-                        <MdOutlineArrowDropDown size={20} />
-                      </div>
-                    </AccordionItemButton>
-                  </AccordionItemHeading>
-                  <AccordionItemPanel>
-                    <p className="secondaryText">{item.detail}</p>
-                  </AccordionItemPanel>
-                </AccordionItem>
-              );
-            })}
-          </Accordion>
+                  <Typography >
+                    {x.icon} &nbsp;&nbsp; {x.heading}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Typography>{x.detail}</Typography>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </Paper>
         </div>
       </Paper>
     </Paper>

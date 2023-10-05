@@ -355,7 +355,6 @@ export const getInfo = async (data) => {
     ) {
       throw res.data;
     }
-    console.log("res",res);
     return res.data;
   } catch (error) {
     toast.error(error.response.data.message);
