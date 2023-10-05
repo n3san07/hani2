@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
-import { Divider,Paper } from "@mui/material";
+import { Divider, Paper } from "@mui/material";
+import { BsInstagram, BsTwitter, BsFacebook } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -21,10 +22,9 @@ const Footer = () => {
           <span className="primaryText">Information</span>
           <span className="secondaryText">isreal,jerusalem</span>
           <div className="flexCenter f-menu">
-            <span>Property</span>
-            <span>Services</span>
-            <span>Product</span>
-            <span>About Us</span>
+            <BsInstagram size={25} />
+            <BsTwitter size={25} />
+            <BsFacebook size={25} />
           </div>
         </div>
       </div>
