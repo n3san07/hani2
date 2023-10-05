@@ -42,7 +42,7 @@ const Value = () => {
                   id="panel1a-header"
                 >
                   <Typography >
-                    {x.icon} &nbsp;&nbsp; {x.heading}
+                    {x.icon} &nbsp; &nbsp; {x.heading}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
