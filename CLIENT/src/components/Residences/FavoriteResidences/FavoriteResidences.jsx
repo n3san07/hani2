@@ -77,7 +77,7 @@ const FavoriteResidences = () => {
       <Paper sx={{minHeight:"72vh"}} alignItems="center" textAlign="center">
         <Grid alignItems="center" container spacing={2}>
           {data?.map((card) => (
-            <Grid key={card.id} item xs={12} sm={6} md={4} lg={3}>
+            <Grid key={card._id} item xs={12} sm={6} md={4} lg={3}>
               <CardComp likedIDarray={likedIDarray} card={card} />
             </Grid>
           ))}

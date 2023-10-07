@@ -8,6 +8,7 @@ const ROUTES = {
   FAVORITERESIDENCES: "/FavoriteResidences",
   EDITRESIDENCES: "/EditResidences",
   EDITUSERPROFILE: "/edituserprofile",
+  ADMINDASHBOARD: "/AdminDashboard",
 };
 
 export default ROUTES;

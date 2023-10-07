@@ -1,5 +1,6 @@
 import express from "express";
 import UserModel from "../models/modelUsers.js";
+import ResidencyModel from "../models/modelResidency.js";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -200,7 +201,7 @@ export const EditUserData = async (req, res) => {
 };
 
 export const getSellerInfo = async (req, res) => {
-  const Email = req.body.data
+  const Email = req.body.data;
   console.log(req.body);
   if (!Email) {
     res.status(404).json({ message: "no email found" });
@@ -213,6 +214,36 @@ export const getSellerInfo = async (req, res) => {
     res.status(200).json({ user });
   } catch (error) {
     res.status(404).json({ message: error.message });
-
   }
-}
+};
+
+export const getAdminData = async (req, res) => {
+  const email = req.body.email;
+  if (!email) {
+    res.status(404).json({ message: "no email Found " });
+  }
+  //check if the user is an admin
+  const user = await UserModel.findOne({ Email: email });
+  if (!user.isAdmin) {
+    res.status(404).json({ message: "you dont have a promisor" });
+  }
+  const PropertiesCount = await ResidencyModel.countDocuments();
+  const Users = await UserModel.find({}, "Email Name _id Picture Phone").lean();
+
+  Users.forEach((user) => {
+    user.id = user._id.toString();
+    delete user._id;
+  });
+  const finall = {
+    PropertiesCount: PropertiesCount,
+    UsersCount: Users.length,
+    Users: Users,
+  };
+
+  res.status(200).json({ finall });
+  try {
+  } catch (error) {
+    console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};

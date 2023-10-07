@@ -362,3 +362,24 @@ export const getInfo = async (data) => {
     throw error;
   }
 };
+/// admin area 
+export const getAdminData = async (email) => {
+  try {
+    const res = await api.post(
+      "/Users/getAdminData",
+      { email },
+      { headers }
+    );
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    return res.data;
+  } catch (error) {
+    toast(error.response.data.message || "somthing went wrong");
+    throw error;
+  }
+};

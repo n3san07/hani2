@@ -75,7 +75,7 @@ const CardButtonComp = ({ likedIDarray, card }) => {
         ) : (
           ""
         )}
-        {UserDetails?.Email == card?.owner ? (
+        {UserDetails?.Email == card?.owner || UserDetails?.isAdmin  ? (
           <EditIcon
             sx={{ cursor: "pointer" }}
             onClick={() => {

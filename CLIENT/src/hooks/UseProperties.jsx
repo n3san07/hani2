@@ -12,6 +12,7 @@ import {
   checkLikeProperties,
   sendDelete,
   getInfo,
+  getAdminData
 } from "../services/api";
 import { toast } from "react-toastify";
 
@@ -125,3 +126,17 @@ export const deleteP = async (id) => {
 export const getSellerInfo = (email) => {
   return getInfo(email);
 };
+// admin data 
+export const AdminData = (email) => {
+
+  let { data, isError, isLoading, refetch } = useQuery({
+    queryKey: ["getAdminData"],
+    queryFn: async () => {
+      const x =  await getAdminData(email)
+      return x.finall;
+    },
+    refetchOnWindowFocus: false,
+  });
+  return { data, isError, isLoading, refetch };
+};
+

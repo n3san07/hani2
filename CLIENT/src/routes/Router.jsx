@@ -13,6 +13,7 @@ import EditResidences from "../components/Residences/EditResidences/EditResidenc
 import UserDetailsContext from "../context/UserDetailsContext";
 import EditUserProfile from "../components/UserProfile/EditUserProfile";
 import MainLayOut from "../components/layout/main/MainLayOut.jsx";
+import AdminDashboard from "../components/Admin/AdminDashboard";
 
 const Router = () => {
   const {UserDetails } = useContext(UserDetailsContext);
@@ -31,6 +32,7 @@ const Router = () => {
       <Route path={ROUTES.MYRESIDENCES} element={UserDetails ?  <MyResidences /> : <MainLayOut/>  } />
       <Route path={ROUTES.FAVORITERESIDENCES} element={UserDetails ?  <FavoriteResidences /> : <MainLayOut/>  } />
       <Route path={ROUTES.EDITUSERPROFILE} element={UserDetails ?  <EditUserProfile /> : <MainLayOut/>  } />
+      <Route path={ROUTES.ADMINDASHBOARD} element={UserDetails && UserDetails?.isAdmin ?  <AdminDashboard /> : <MainLayOut/>  } />
 
 
       <Route path="*" element={<NotFound />} />

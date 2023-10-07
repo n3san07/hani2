@@ -14,6 +14,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/routesModel";
 import { useModel } from "../Residences/AddResidences/AddResidencesModel";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { Paper } from "@mui/material";
 export default function ProfileMenu({ user, logout }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -25,7 +27,6 @@ export default function ProfileMenu({ user, logout }) {
   };
   const nav = useNavigate();
   const { handelToggleModel, handleOpen } = useModel();
-
   return (
     <>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -84,6 +85,21 @@ export default function ProfileMenu({ user, logout }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
+        {user?.isAdmin && (
+          <MenuItem
+            onClick={() => {
+              handleClose;
+              nav(ROUTES.ADMINDASHBOARD);
+            }}
+          >
+            <Paper
+              elevation={8}
+              sx={{ p: 1, backgroundColor: "#FF9E45", borderRadius: "5%" }}
+            >
+              <AdminPanelSettingsIcon /> DashBord
+            </Paper>
+          </MenuItem>
+        )}
         <MenuItem
           onClick={() => {
             handleClose;
