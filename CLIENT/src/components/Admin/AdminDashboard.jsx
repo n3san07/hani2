@@ -23,11 +23,32 @@ const AdminDashboard = () => {
     return <NotFound />;
   }
 
+  const styles = {
+    container: {
+      padding: "10px", // Default padding for larger screens
+      maxWidth: "md",
+    },
+    paper: {
+      elevation: 8,
+      padding: "10px", // Default padding for larger screens
+    },
+    // Media query for screens with a maximum width of 600px (phones)
+    "@media (max-width: 600px)": {
+      container: {
+        padding: "20px", // Increased padding for phones
+      },
+      paper: {
+        elevation: 16,
+        padding: "20px", // Increased padding for phones
+      },
+    },
+  };
+
   return (
     <>
       <Paper sx={{ minHeight: "72vh" }} elevation={2}>
         <Typography
-          sx={{ p: 2 , fontSize:"6vw"}}
+          sx={{ p: 2, fontSize: "6vw" }}
           fontFamily="fantasy"
           variant="h2"
         >
@@ -54,8 +75,8 @@ const AdminDashboard = () => {
             />
           </Grid>
         </Grid>
-        <Container sx={{ p: 10 }} maxWidth="md">
-          <Paper elevation={8}>
+        <Container sx={{ ...styles.container, paddingTop: 6 }} maxWidth="md">
+          <Paper sx={{ ...styles.paper }}>
             <DataTable Users={data?.Users} />
           </Paper>
         </Container>
