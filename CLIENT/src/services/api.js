@@ -32,7 +32,7 @@ export const getAllProperties = async () => {
     }
     return res.data;
   } catch (error) {
-    toast("somthing went wrong");
+    toast.error("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -52,7 +52,6 @@ export const getSwiperProperties = async () => {
     }
     return res.data;
   } catch (error) {
-    toast("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -82,7 +81,7 @@ export const getFilterProperties = async (
     }
     return res.data;
   } catch (error) {
-    toast("somthing went wrong");
+    toast.error("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -107,7 +106,7 @@ export const getSinglePropertie = async (id) => {
     }
     return res.data;
   } catch (error) {
-    toast(error.response.data.message || "somthing went wrong");
+    toast.error(error.response.data.message || "somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -129,7 +128,7 @@ export const getMyResidences = async (email) => {
     }
     return res.data;
   } catch (error) {
-    toast("somthing went wrong");
+    toast.error("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -151,7 +150,7 @@ export const getAllFavorite = async (email) => {
     }
     return res.data;
   } catch (error) {
-    toast(error.response.data.message || "somthing went wrong");
+    toast.error(error.response.data.message || "somthing went wrong");
     throw error;
   }
 };
@@ -173,7 +172,7 @@ export const addResidence = async (data) => {
     toast.success("Adding Your Property Was A Success");
     return res.data;
   } catch (error) {
-    toast("somthing went wrong");
+    toast.error("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -375,7 +374,7 @@ export const getAdminData = async (email) => {
     }
     return res.data;
   } catch (error) {
-    toast(error.response.data.message || "somthing went wrong");
+    toast.error(error.response.data.message || "somthing went wrong");
     throw error;
   }
 };
