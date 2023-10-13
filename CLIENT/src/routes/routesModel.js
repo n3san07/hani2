@@ -9,6 +9,8 @@ const ROUTES = {
   EDITRESIDENCES: "/EditResidences",
   EDITUSERPROFILE: "/edituserprofile",
   ADMINDASHBOARD: "/AdminDashboard",
+  FORGETPASSWORD:"/ForgetPassword",
+  RESTPASSWORD:"/users/resetPassword"
 };
 
 export default ROUTES;

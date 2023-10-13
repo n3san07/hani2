@@ -4,6 +4,7 @@ import ResidencyModel from "../models/modelResidency.js";
 import asyncHandler from "express-async-handler";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import sendEmail from "../utils/nodMailer.js";
 const creatToken = (user) => {
   const AnalysedUsrer = {
     id: user._id,
@@ -133,6 +134,19 @@ export const getUserData = async (req, res) => {
     }
   }
 };
+
+export const getUser = async (req, res) => {
+  const user = req.body.user;
+  if (!user) {
+    return res.status(404).json({ message: "no id found " });
+  }
+  try {
+    res.status(200).json({ Name: user.Name, Picture: user.Picture });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const EditUserData = async (req, res) => {
   if (!req.body) {
     return res.status(401).json({ message: "no data found" });
@@ -244,6 +258,63 @@ export const getAdminData = async (req, res) => {
   try {
   } catch (error) {
     console.log(error);
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const SendResetPasswordEmail = async (req, res) => {
+  const Email = req.body.Email;
+  if (!Email) {
+    res.status(404).json({ message: "no email Found " });
+  }
+
+  try {
+    const user = await UserModel.findOne({ Email: Email });
+    if (!user) {
+      return res.status(404).json({ message: "Invalid user" });
+    }
+    const AnalysedUsrer = {
+      id: user._id,
+    };
+    const token = await jwt.sign({ AnalysedUsrer }, process.env.SECRET, {
+      expiresIn: "15m",
+    });
+
+    const dataToSend = {
+      from: '"بيوتنا" <foo@example.com>',
+      to: Email,
+      subject: "Reset Password",
+      text: "Reset Password",
+      html: `
+      <span>
+      <h1>you have 15m to rest your password </h1>
+      </br>
+      <b>${req.headers.origin}/users/resetPassword/${user._id}/${token}</b> 
+      </span>
+      
+      `,
+    };
+    sendEmail(dataToSend);
+    res.status(200).json({ message: "check you email ^_^" });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+export const updatePassword = async (req, res) => {
+  const user = req.body.user;
+  const pass = req.body.pass;
+  if (!user && !newPassword) {
+    return res.status(404).json({ message: "Invalid user" });
+  }
+  try {
+    const newPassword = await bcrypt.hash(pass, 10);
+    await UserModel.findOneAndUpdate(
+      { Email: user.Email },
+      { Password: newPassword }
+    );
+    res.status(200).json({ message: "success ^_^" });
+  } catch (error) {
     res.status(404).json({ message: error.message });
   }
 };

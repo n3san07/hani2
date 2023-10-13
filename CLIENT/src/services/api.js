@@ -1,12 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
-/*export const api = axios.create({
-  baseURL: "http://localhost:3001/api",
-})*/
 export const api = axios.create({
-  baseURL: "https://houseappserver.vercel.app/api",
+  baseURL: "http://localhost:3001/api",
 });
+/*export const api = axios.create({
+  baseURL: "https://houseappserver.vercel.app/api",
+});*/
 
 const getTokenandSetHeaders = () => {
   const token = checkUserFromLocalStorge()?.token;
@@ -362,14 +362,10 @@ export const getInfo = async (data) => {
     throw error;
   }
 };
-/// admin area 
+/// admin area
 export const getAdminData = async (email) => {
   try {
-    const res = await api.post(
-      "/Users/getAdminData",
-      { email },
-      { headers }
-    );
+    const res = await api.post("/Users/getAdminData", { email }, { headers });
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
@@ -380,6 +376,67 @@ export const getAdminData = async (email) => {
     return res.data;
   } catch (error) {
     toast(error.response.data.message || "somthing went wrong");
+    throw error;
+  }
+};
+/// forget password area
+export const SendForgetPassword = async (email) => {
+  try {
+    const res = await api.post("/Users/SendResetPasswordEmail", { ...email });
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    toast.success(res.data.message);
+    return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message);
+    console.log(error);
+    throw error;
+  }
+};
+export const getUser = async (token) => {
+  try {
+    const res = await api.get("/Users/getUser", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    toast.success(res.data.message);
+    return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message || "somthing went wrong");
+    throw error;
+  }
+};
+export const updatePassword = async (pass,token) => {
+  try {
+    const res = await api.patch("/Users/updatePassword",{pass}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (
+      res.statusCode == 400 ||
+      res.statusCode == 401 ||
+      res.statusCode == 500
+    ) {
+      throw res.data;
+    }
+    toast.success(res.data.message);
+    return res.data;
+  } catch (error) {
+    toast.error(error.response.data.message || "somthing went wrong");
     throw error;
   }
 };

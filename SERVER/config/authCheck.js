@@ -3,28 +3,27 @@ import UserModel from "../models/modelUsers.js";
 
 const authenticateToken = async (req, res, next) => {
   if (!req.header("Authorization")) {
-    console.log(req.header("Authorization"));
     return res.status(404).json({ message: "NO Authorization Found " });
   }
 
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
-
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
-    const userId = decoded.AnalysedUsrer.id;
 
+    const userId = decoded.AnalysedUsrer.id
     const user = await UserModel.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-
+     req.body.user = user;
     next();
   } catch (error) {
+    console.log(error);
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({ message: "Invalid token" });
     } else {
-      return res.status(500).json({ error: error.message });
+      return res.status(500).json({ message: error.message });
     }
   }
 };

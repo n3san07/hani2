@@ -98,7 +98,7 @@ export default function SignUp() {
                   id="Password"
                   error={Boolean(errors?.Password)}
                   helperText={errors?.Password?.message}
-                  autoComplete="new-password"
+                  autoComplete="password"
                   {...register("Password", {
                     minLength: {
                       value: 6,
@@ -124,7 +124,7 @@ export default function SignUp() {
             >
               Login
             </Button>
-            <Grid container justifyContent="flex-end">
+            <Grid container justifyContent="space-between">
               <Grid item>
                 <Typography
                   sx={{ cursor: "pointer" }}
@@ -136,6 +136,17 @@ export default function SignUp() {
                   dont have account? Sign up
                 </Typography>
                 {errors.email && <p>{errors.email.message}</p>}
+              </Grid>
+              <Grid item>
+                <Typography
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => {
+                    navigate(ROUTES.FORGETPASSWORD);
+                  }}
+                  variant="body2"
+                >
+                  forget password?
+                </Typography>
               </Grid>
             </Grid>
           </Box>
