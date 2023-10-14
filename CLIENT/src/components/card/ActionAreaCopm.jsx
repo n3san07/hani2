@@ -7,6 +7,8 @@ import ROUTES from "../../routes/routesModel.js";
 
 const ActionAreaCopm = ({ card }) => {
   const nav = useNavigate();
+
+  console.log(card);
   return (
     <>
       <CardActionArea
@@ -15,6 +17,7 @@ const ActionAreaCopm = ({ card }) => {
         }}
       >
         <CardMedia
+          alt={card?.title}
           component="img"
           height="190px"
           image={
