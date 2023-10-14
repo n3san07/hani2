@@ -34,6 +34,7 @@ const Header = () => {
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
         <img
+        loading="lazy"
           className="mylogo"
           onClick={() => {
             navigate(ROUTES.ROOT);

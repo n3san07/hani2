@@ -63,7 +63,7 @@ const Hero = () => {
             }}
             className="image-container"
           >
-            <img src="./hero-image.png" alt="houses" />
+            <img loading="lazy" src="./hero-image.png" alt="houses" />
           </motion.div>
         </div>
       </div>

@@ -97,6 +97,7 @@ const ImgUploadComponent = ({ handleBack, handleNext, setPropertyDetails }) => {
           </Typography>
           <Paper elevation={3} sx={{ maxWidth: 400 }}>
             <img
+            loading="lazy"
               width="400px"
               height="400px"
               src={ImageURL[currentImage]}
