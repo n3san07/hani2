@@ -13,6 +13,13 @@ const ImgUploadComponent = ({ handleBack, handleNext, setPropertyDetails }) => {
         cloudName: "dxfc1owsn",
         uploadPreset: "ofwwpdqg",
         maxFiles: 3,
+        resourceType: "image",
+        cropping: "limit", // Optional, to limit cropping
+        quality: 50, // Adjust quality (0-100)
+        transformation: [
+          { width: 800, height: 600, crop: "fill" },
+          { format: "jpeg" } // Adjust width and height
+        ],
       },
       (err, result) => {
         if (result.event === "success") {
