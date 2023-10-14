@@ -17,6 +17,7 @@ const ActionAreaCopm = ({ card }) => {
         }}
       >
         <CardMedia
+          loading="eager"
           alt={card?.title}
           component="img"
           height="190px"
