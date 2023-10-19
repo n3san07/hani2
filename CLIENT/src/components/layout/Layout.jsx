@@ -14,9 +14,12 @@ const Layout = ({ children }) => {
     if (checkUserFromLocalStorge()?.token) {
       const user = await setUserToReactApp();
       if (!user) {
-        deleteUserFromLocalStorge;
+        deleteUserFromLocalStorge();
+        UserDetails(null);
       }
       setUserDetails(user);
+    } else {
+      UserDetails(null);
     }
   };
 

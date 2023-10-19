@@ -39,12 +39,14 @@ const ResidenceDetails = () => {
   }
 
   const getSellerInfo = async () => {
-    try {
-      return await getInfo(data?.owner).then((res) => {
-        setinfo(res.user);
-      });
-    } catch (error) {
-      console.log(error);
+    if (UserDetails) {
+      try {
+        return await getInfo(data?.owner).then((res) => {
+          setinfo(res.user);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   if (!info) {
@@ -147,7 +149,7 @@ const ResidenceDetails = () => {
                     component={"a"}
                   >
                     <Avatar
-                      sx={{ width: 32, height: 32,mr:2 }}
+                      sx={{ width: 32, height: 32, mr: 2 }}
                       alt={info?.Name}
                       src={
                         info?.Picture ||
