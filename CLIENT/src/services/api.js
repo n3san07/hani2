@@ -1,12 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { checkUserFromLocalStorge } from "./LocalStorge";
-export const api = axios.create({
-  baseURL: "http://localhost:3001/api",
-});
 /*export const api = axios.create({
-  baseURL: "https://houseappserver.vercel.app/api",
+  baseURL: "http://localhost:3001/api",
 });*/
+export const api = axios.create({
+  baseURL: "https://houseappserver.vercel.app/api",
+});
 const getTokenandSetHeaders = () => {
   const token = checkUserFromLocalStorge()?.token;
   return token;
