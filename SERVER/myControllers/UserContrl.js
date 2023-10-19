@@ -124,8 +124,8 @@ export const getUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-    user.forEach((user) => {
-      delete user?.Password;
+    user.forEach((x) => {
+      delete x?.Password;
     });
     res.status(200).json({ user });
   } catch (error) {
