@@ -102,7 +102,6 @@ export const LogIn = async (req, res) => {
         .json({ message: "Email Or Password Are Not Correct" });
     }
     const token = creatToken(user._id);
-
     res.status(200).json({ token });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -125,6 +124,9 @@ export const getUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
+    user.forEach((user) => {
+      delete user?.Password;
+    });
     res.status(200).json({ user });
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
@@ -206,7 +208,9 @@ export const EditUserData = async (req, res) => {
       res.status(404).json({ message: "somtheing went wrong" });
       return;
     }
-
+    newData.forEach((user) => {
+      delete user?.Password;
+    });
     const token = creatToken(newData._id);
     res.status(200).json({ user: newData, token: token });
   } catch (error) {
@@ -225,6 +229,9 @@ export const getSellerInfo = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
+    Users.forEach((user) => {
+      delete user?.Password;
+    });
     res.status(200).json({ user });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -247,6 +254,7 @@ export const getAdminData = async (req, res) => {
   Users.forEach((user) => {
     user.id = user._id.toString();
     delete user._id;
+    delete user?.Password;
   });
   const finall = {
     PropertiesCount: PropertiesCount,
