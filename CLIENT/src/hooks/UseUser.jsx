@@ -5,7 +5,7 @@ import {
   getUserData,
   sendEditUserData,
   SendForgetPassword,
-  getUser
+  getUser,
 } from "../services/api";
 import {
   addUserToLoacalStorge,
@@ -26,10 +26,11 @@ export const UseSignUp = async (user) => {
 
 export const UseLogIn = async (user) => {
   try {
-    await deleteUserFromLocalStorge();
+    deleteUserFromLocalStorge();
     const data = await LoginUser(user);
-    await addUserToLoacalStorge(data);
-    return await setUserToReactApp();
+    addUserToLoacalStorge(data);
+    const userFromServer = await UseUserData(data);
+    return userFromServer;
   } catch (error) {
     console.log(error);
   }

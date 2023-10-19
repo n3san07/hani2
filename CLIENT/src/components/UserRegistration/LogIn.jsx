@@ -24,13 +24,11 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-  if (localStorage.getItem("user")) {
-    localStorage.removeItem("user");
-  }
+
   const onSubmit = async (data) => {
     try {
       // dont need it just for extra protection
-  
+      localStorage.removeItem("user");
       await setUserDetails(null);
       const user = { ...data };
       const res = await UseLogIn(user);
