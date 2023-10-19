@@ -124,7 +124,7 @@ export const getUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-    user.Password  = "^_^"
+    user.Password = "^_^";
     res.status(200).json({ user });
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
@@ -194,8 +194,10 @@ export const EditUserData = async (req, res) => {
           .json({ message: "this Email is already in use" });
       }
     }
-
+    // update the owner data for the residency table
+    await ResidencyModel.updateMany({ Email: oldEmail }, { owner: Email });
     const userId = user._id.toString();
+    // updata all the user info
     const final = await UserModel.findByIdAndUpdate(userId, updatedValues);
     if (!final) {
       res.status(404).json({ message: "somtheing went wrong" });
@@ -224,7 +226,7 @@ export const getSellerInfo = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-    user.Password  = "^_^"
+    user.Password = "^_^";
     res.status(200).json({ user });
   } catch (error) {
     res.status(404).json({ message: error.message });
