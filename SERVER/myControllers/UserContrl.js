@@ -124,9 +124,6 @@ export const getUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-    user.forEach((x) => {
-      delete x?.Password;
-    });
     res.status(200).json({ user });
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
