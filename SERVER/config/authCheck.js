@@ -9,7 +9,6 @@ const authenticateToken = async (req, res, next) => {
   const token = req.header("Authorization").split(" ")[1]; // Extract the token
   try {
     const decoded = jwt.verify(token, process.env.SECRET);
-
     const userId = decoded.AnalysedUsrer.id
     const user = await UserModel.findById(userId);
 

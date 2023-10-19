@@ -6,7 +6,6 @@ export const mongoConectAtlas = () => {
   const DBUserName = process.env.DBUserName;
 
   if (!DBUserName && !password) {
-    console.log(password);
     console.log("faild to connect DB password and username wrong");
   }
 

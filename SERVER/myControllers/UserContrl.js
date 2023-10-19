@@ -74,7 +74,6 @@ export const Register = asyncHandler(async (req, res) => {
 
 export const LogIn = async (req, res) => {
   const { Email, Password } = req.body;
-  console.log(req.body.user);
 
   if (!Email || !Password) {
     return res.status(404).json({ message: "Data Is not full" });
@@ -102,6 +101,7 @@ export const LogIn = async (req, res) => {
         .json({ message: "Email Or Password Are Not Correct" });
     }
     const token = creatToken(user._id);
+
     res.status(200).json({ token });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -124,6 +124,7 @@ export const getUserData = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
+    user.Password  = "^_^"
     res.status(200).json({ user });
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
@@ -205,9 +206,7 @@ export const EditUserData = async (req, res) => {
       res.status(404).json({ message: "somtheing went wrong" });
       return;
     }
-    newData.forEach((user) => {
-      delete user?.Password;
-    });
+
     const token = creatToken(newData._id);
     res.status(200).json({ user: newData, token: token });
   } catch (error) {
@@ -217,7 +216,6 @@ export const EditUserData = async (req, res) => {
 
 export const getSellerInfo = async (req, res) => {
   const Email = req.body.data;
-  console.log(req.body);
   if (!Email) {
     res.status(404).json({ message: "no email found" });
   }
@@ -226,9 +224,7 @@ export const getSellerInfo = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "Invalid user" });
     }
-    Users.forEach((user) => {
-      delete user?.Password;
-    });
+    user.Password  = "^_^"
     res.status(200).json({ user });
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -251,7 +247,6 @@ export const getAdminData = async (req, res) => {
   Users.forEach((user) => {
     user.id = user._id.toString();
     delete user._id;
-    delete user?.Password;
   });
   const finall = {
     PropertiesCount: PropertiesCount,

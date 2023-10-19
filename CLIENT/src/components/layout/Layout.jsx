@@ -15,11 +15,11 @@ const Layout = ({ children }) => {
       const user = await setUserToReactApp();
       if (!user) {
         deleteUserFromLocalStorge();
-        UserDetails(null);
+        setUserDetails(null);
       }
       setUserDetails(user);
     } else {
-      UserDetails(null);
+      setUserDetails(null);
     }
   };
 

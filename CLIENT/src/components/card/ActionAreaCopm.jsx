@@ -8,7 +8,6 @@ import ROUTES from "../../routes/routesModel.js";
 const ActionAreaCopm = ({ card }) => {
   const nav = useNavigate();
 
-  console.log(card);
   return (
     <>
       <CardActionArea

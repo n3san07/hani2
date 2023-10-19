@@ -26,11 +26,10 @@ export const UseSignUp = async (user) => {
 
 export const UseLogIn = async (user) => {
   try {
-    deleteUserFromLocalStorge();
+    await deleteUserFromLocalStorge();
     const data = await LoginUser(user);
-    addUserToLoacalStorge(data);
-    const userFromServer = await UseUserData(data);
-    return userFromServer;
+    await addUserToLoacalStorge(data);
+    return await setUserToReactApp();
   } catch (error) {
     console.log(error);
   }

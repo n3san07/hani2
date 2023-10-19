@@ -24,7 +24,6 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-
   const onSubmit = async (data) => {
     try {
       // dont need it just for extra protection

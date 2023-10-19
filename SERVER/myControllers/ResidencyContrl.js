@@ -25,7 +25,6 @@ export const addResidency = asyncHandler(async (req, res) => {
       bathRoom: req.body.data.facilities.bathRoom,
     },
   };
-  console.log(req.body);
   try {
     const newResidency = await ResidencyModel.create(obj);
     res.send(newResidency);
@@ -96,7 +95,6 @@ export const DeleteResidency = asyncHandler(async (req, res) => {
 export const likeResidency = asyncHandler(async (req, res) => {
   const ResidencyId = req.params["id"];
   const UserEmail = req.body.email;
-  console.log(UserEmail);
   if (!ResidencyId || !UserEmail) {
     return res.status(404).json({ message: "data is req" });
   }
@@ -130,7 +128,6 @@ export const likeResidency = asyncHandler(async (req, res) => {
 
 export const getAllFavoriteToCheckLike = asyncHandler(async (req, res) => {
   const email = req.body.email;
-  console.log(email);
   if (!email) {
     return res.status(404).json({ message: "NO email Found" });
   }
@@ -177,7 +174,6 @@ export const getFilterProperties = asyncHandler(async (req, res) => {
       filterCriteria.ResidencyType = UrlQuerystate;
     }
 
-    console.log("Filter Criteria:", UrlQuerystate);
 
     const db =
       Object.keys(filterCriteria).length === 0
@@ -197,7 +193,6 @@ export const getMyResidences = asyncHandler(async (req, res) => {
     res.status(404).json({ message: "no Email Detected" });
     return;
   }
-  console.log(email);
   try {
     const checkUser = await UserModel.find({ Email: email });
 
