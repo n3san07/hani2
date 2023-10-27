@@ -8,9 +8,10 @@
   </p>
   
   
-<h1> <a href="https://houseappclient.vercel.app/"></a>
-View Demo</h1>
-<br />
+<h4>
+    <a href="https://houseappclient.vercel.app">View Demo</a>
+  <span> · </span>
+  </h4>
 
 <!-- Table of Contents -->
 
@@ -23,7 +24,7 @@ View Demo</h1>
   - [Prerequisites](#bangbang-prerequisites)
   - [Installation](#gear-installation)
 - [Contact](#handshake-contact)
-
+</div>
 ### :space_invader: Tech Stack
 
 <details>
