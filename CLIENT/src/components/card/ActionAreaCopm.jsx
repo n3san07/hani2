@@ -53,7 +53,7 @@ const ActionAreaCopm = ({ card }) => {
                   &#8362;
                 </span>
               }
-              label={card.price}
+              label={Intl.NumberFormat().format(card.price)}
             />
           </Box>
           <ReadMoreTypography

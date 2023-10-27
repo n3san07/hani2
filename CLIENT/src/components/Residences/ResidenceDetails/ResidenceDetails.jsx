@@ -56,7 +56,7 @@ const ResidenceDetails = () => {
     <>
       <Paper>
         <Slideshow
-        key={data?.imgsUrl}
+          key={data?.imgsUrl}
           sx={{
             flex: 1,
           }}
@@ -132,8 +132,8 @@ const ResidenceDetails = () => {
               <Typography variant="h2" sx={{ marginTop: "3rem" }}>
                 <Box sx={{ color: "#ff9e45" }} component={"span"}>
                   ₪
-                </Box>{" "}
-                {data?.price}
+                </Box>
+                {Intl.NumberFormat().format(data?.price)}
               </Typography>
               {data?.flexiblePrice && (
                 <Box sx={{ color: "#ff9e45" }} component={"span"}>
