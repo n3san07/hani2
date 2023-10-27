@@ -17,7 +17,6 @@ export const getAllProperties = async () => {
     const res = await api.get("/Residency/getallResidency", {
       timeout: 10 * 1000,
     });
-
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
