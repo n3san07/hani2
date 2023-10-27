@@ -83,6 +83,9 @@ Install my-project with npm
 ```
 
  <h2>First of all you need to change the env file </h2>
+ <br /><br />
+  <h2>and change the api file in the client side </h2>
+
 
 For the client and server
 
