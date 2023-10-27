@@ -56,6 +56,7 @@ const ResidenceDetails = () => {
     <>
       <Paper>
         <Slideshow
+        key={data?.imgsUrl}
           sx={{
             flex: 1,
           }}
