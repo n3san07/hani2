@@ -24,7 +24,8 @@
   - [Prerequisites](#bangbang-prerequisites)
   - [Installation](#gear-installation)
 - [Contact](#handshake-contact)
-</div>
+
+
 ### :space_invader: Tech Stack
 
 <details>
@@ -105,3 +106,5 @@ starting the server
 ## :handshake: Contact
 
 on facebook ( Hani Gaith)
+
+</div>
