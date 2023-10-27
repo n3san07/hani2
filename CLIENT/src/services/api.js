@@ -7,13 +7,9 @@ import { checkUserFromLocalStorge } from "./LocalStorge";
 export const api = axios.create({
   baseURL: "https://houseappserver.vercel.app/api",
 });
-const getTokenandSetHeaders = () => {
-  const token = checkUserFromLocalStorge()?.token;
-  return token;
-};
 
-const headers = {
-  Authorization: `Bearer ${getTokenandSetHeaders()}`,
+let headers = {
+  Authorization: `Bearer ${checkUserFromLocalStorge()?.token}`,
 };
 
 export const getAllProperties = async () => {
@@ -111,6 +107,7 @@ export const getSinglePropertie = async (id) => {
   }
 };
 export const getMyResidences = async (email) => {
+  console.log(headers);
   try {
     const res = await api.post(
       "/Residency/getMyResidences",
@@ -220,6 +217,8 @@ export const sendDelete = async (id) => {
 };
 
 export const likePropertie = async (cardId, email) => {
+  console.log(headers);
+
   try {
     const res = await api.patch(
       `/Residency/likeResidency/${cardId}`,
@@ -417,13 +416,17 @@ export const getUser = async (token) => {
     throw error;
   }
 };
-export const updatePassword = async (pass,token) => {
+export const updatePassword = async (pass, token) => {
   try {
-    const res = await api.patch("/Users/updatePassword",{pass}, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const res = await api.patch(
+      "/Users/updatePassword",
+      { pass },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     if (
       res.statusCode == 400 ||
       res.statusCode == 401 ||
