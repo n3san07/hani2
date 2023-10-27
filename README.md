@@ -68,9 +68,10 @@ View Demo</h1>
 
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Admin dashboard
+- all CRUD features Plus also a favorite features
+- Modern and slick design With animations
+- Using the high end Tech StackS
 
 ## :toolbox: Getting Started
 
@@ -87,6 +88,8 @@ Install my-project with npm
 ```bash
   git clone https://github.com/n3san07/hani2
 ```
+
+ <h2>First of all you need to change the env file </h2>
 
 For the client and server
 
