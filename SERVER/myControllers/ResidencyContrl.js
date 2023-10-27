@@ -44,7 +44,7 @@ export const getallResidency = asyncHandler(async (req, res) => {
 export const getSwiperProperties = asyncHandler(async (req, res) => {
   try {
     const ResidencysFromDB = await ResidencyModel.find({})
-      .sort({ createdAt: -1 }) // Sort by createdAt field in descending order
+      .sort({ _id: -1 }) // Sort by createdAt field in descending order
       .limit(8); // Limit the results to 8 records
 
     res.status(200).json(ResidencysFromDB);
@@ -173,7 +173,6 @@ export const getFilterProperties = asyncHandler(async (req, res) => {
     if (UrlQuerystate) {
       filterCriteria.ResidencyType = UrlQuerystate;
     }
-
 
     const db =
       Object.keys(filterCriteria).length === 0
