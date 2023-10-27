@@ -80,7 +80,7 @@ View Demo</h1>
 <details>
 <summary>Database</summary>
   <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
+    <li>MONGO DB</li>
     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
     <li><a href="https://redis.io/">Redis</a></li>
     <li><a href="https://neo4j.com/">Neo4j</a></li>
