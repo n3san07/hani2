@@ -9,6 +9,8 @@
   
   
 <h4>
+<p> admin0@admin.com </p>
+<p> admin0</p>
     <a href="https://houseappclient.vercel.app">View Demo</a>
   <span> · </span>
   </h4>
@@ -24,7 +26,6 @@
   - [Prerequisites](#bangbang-prerequisites)
   - [Installation](#gear-installation)
 - [Contact](#handshake-contact)
-
 
 ### :space_invader: Tech Stack
 
@@ -61,7 +62,7 @@
 
 ### :dart: Features
 
-- Admin dashboard
+- Admin dashboard with a full control for the website
 - all CRUD features Plus also a favorite features
 - Modern and slick design With animations
 - Using the high end Tech StackS
@@ -85,7 +86,6 @@ Install my-project with npm
  <h2>First of all you need to change the env file </h2>
  <br /><br />
   <h2>and change the api file in the client side </h2>
-
 
 For the client and server
 
