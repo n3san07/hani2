@@ -107,7 +107,6 @@ export const getSinglePropertie = async (id) => {
   }
 };
 export const getMyResidences = async (email) => {
-  console.log(headers);
   try {
     const res = await api.post(
       "/Residency/getMyResidences",
@@ -217,7 +216,6 @@ export const sendDelete = async (id) => {
 };
 
 export const likePropertie = async (cardId, email) => {
-  console.log(headers);
 
   try {
     const res = await api.patch(
