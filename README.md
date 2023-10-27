@@ -80,7 +80,7 @@ View Demo</h1>
 <details>
 <summary>Database</summary>
   <ul>
-    <li>MONGO DB</li>
+    <li><h5>mongo db</h5></li>
     <li><a >PostgreSQL</a></li>
     <li><a href="https://redis.io/">Redis</a></li>
     <li><a href="https://neo4j.com/">Neo4j</a></li>
