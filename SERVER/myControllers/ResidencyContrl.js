@@ -34,7 +34,7 @@ export const addResidency = asyncHandler(async (req, res) => {
 });
 export const getallResidency = asyncHandler(async (req, res) => {
   try {
-    const ResidencysFromDB = await ResidencyModel.find({});
+    const ResidencysFromDB = await ResidencyModel.find({}).sort({ _id: -1 });
     res.status(200).json(ResidencysFromDB);
   } catch (error) {
     res.status(404).json({ message: error._message });
