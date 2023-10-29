@@ -21,9 +21,6 @@ const CardButtonComp = ({ likedIDarray, card }) => {
     }
   }, [setisLiked, likedIDarray]);
 
-  const checkIfCardforTheUser = () => {
-    return UserDetails?.Email != card?.owner ? false : true;
-  };
 
 
   return (

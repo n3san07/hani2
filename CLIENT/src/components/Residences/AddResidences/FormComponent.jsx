@@ -28,23 +28,27 @@ const validationSchema = Yup.object().shape({
   ResidencyType: Yup.string().required("Listing Type is required"),
   info: Yup.string()
     .required("Info is required")
-    .min(10, "10 characters required"),
+    .min(10, "10 characters required")
+    .max(300, "300 max"),
   agreeToTerms: Yup.bool().oneOf([true], "You must agree to the terms"),
 });
 const cities = ["jerusalem", "Aldefa", "Aldakhel"];
 
-const FormComponent = ({
-  handleNext,
-  setPropertyDetails,
-  PropertyDetails,
-}) => {
+const FormComponent = ({ handleNext, setPropertyDetails, PropertyDetails }) => {
   const {
     handleSubmit,
     control,
     formState: { isValid, errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
+    mode: "onTouched", // Validate on input touched
+    defaultValues: {
+      title: "",
+      info: "",
+    },
   });
+
+  console.log(errors);
 
   const onSubmit = (data) => {
     setPropertyDetails((prev) => ({
@@ -80,6 +84,7 @@ const FormComponent = ({
                   label="title"
                   variant="outlined"
                   fullWidth
+                  required
                   error={!!errors.title}
                   helperText={errors.title?.message}
                 />

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { checkUserFromLocalStorge } from "./LocalStorge";
+import {
+  checkUserFromLocalStorge,
+  getTokenFromLocalStorge,
+} from "./LocalStorge";
 /*export const api = axios.create({
   baseURL: "http://localhost:3001/api",
 });*/
@@ -9,7 +12,7 @@ export const api = axios.create({
 });
 
 let headers = {
-  Authorization: `Bearer ${checkUserFromLocalStorge()?.token}`,
+  Authorization: `Bearer ${getTokenFromLocalStorge()}`,
 };
 
 export const getAllProperties = async () => {
@@ -166,7 +169,7 @@ export const addResidence = async (data) => {
     toast.success("Adding Your Property Was A Success");
     return res.data;
   } catch (error) {
-    toast.error("somthing went wrong");
+    // toast.error("somthing went wrong");
     console.log(error);
     throw error;
   }
@@ -215,7 +218,6 @@ export const sendDelete = async (id) => {
 };
 
 export const likePropertie = async (cardId, email) => {
-
   try {
     const res = await api.patch(
       `/Residency/likeResidency/${cardId}`,
@@ -231,10 +233,10 @@ export const likePropertie = async (cardId, email) => {
     ) {
       throw res.data;
     }
-    toast.success(res.data.message);
+   // toast.success(res.data.message);
     return res.data;
   } catch (error) {
-    toast(error.response.data.message);
+    //toast(error.response.data.message);
     console.log(error);
     throw error;
   }

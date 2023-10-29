@@ -15,3 +15,11 @@ export const deleteUserFromLocalStorge = () => {
     localStorage.removeItem("user");
   }
 };
+
+export const getTokenFromLocalStorge = () => {
+  return (
+    checkUserFromLocalStorge().token ||
+    JSON.parse(localStorage.getItem("user")).token ||
+    "somthing went wrong"
+  );
+};

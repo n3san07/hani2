@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import NotFound from "../../errorPage/Error";
-import { Grid, Button, Box, Typography,Paper } from "@mui/material";
+import { Grid, Button, Box, Typography, Paper } from "@mui/material";
 import CardComp from "../../card/CardComp";
 import { getAllF, checkLikeP } from "../../../hooks/UseProperties";
 import { toast } from "react-toastify";
@@ -42,9 +42,8 @@ const FavoriteResidences = () => {
   }
 
   if (isDataEmpty) {
-    toast.warn("you dont have any favorites");
     return (
-      <Box
+      <Paper
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -54,7 +53,7 @@ const FavoriteResidences = () => {
         }}
       >
         <Box variant="h5" sx={{ mb: 2 }}>
-          No Data Found
+          No favorites Founds
         </Box>
         <Typography variant="body1">
           Sorry, there is no data available at the moment.
@@ -68,13 +67,14 @@ const FavoriteResidences = () => {
         >
           Let Me Get Back
         </Button>
-      </Box>
+      </Paper>
     );
   }
 
+  console.log(data);
   return (
     <>
-      <Paper sx={{minHeight:"72vh"}} alignItems="center" textAlign="center">
+      <Paper sx={{ minHeight: "72vh" }} alignItems="center" textAlign="center">
         <Grid alignItems="center" container spacing={2}>
           {data?.map((card) => (
             <Grid key={card._id} item xs={12} sm={6} md={4} lg={3}>
