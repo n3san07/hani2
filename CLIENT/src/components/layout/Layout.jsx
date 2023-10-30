@@ -3,7 +3,7 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import { setUserToReactApp } from "../../hooks/UseUser";
 import {
-  checkUserFromLocalStorge,
+  getTokenFromLocalStorge,
   deleteUserFromLocalStorge,
 } from "../../services/LocalStorge";
 import UserDetailsContext from "../../context/UserDetailsContext";
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
   const { setUserDetails, UserDetails } = useContext(UserDetailsContext);
 
   const funTOsetUserDetails = async () => {
-    if (checkUserFromLocalStorge()?.token) {
+    if (getTokenFromLocalStorge()) {
       const user = await setUserToReactApp();
       if (!user) {
         deleteUserFromLocalStorge();

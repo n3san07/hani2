@@ -1,18 +1,20 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import {
-  checkUserFromLocalStorge,
-  getTokenFromLocalStorge,
-} from "./LocalStorge";
+import { getTokenFromLocalStorge } from "./LocalStorge";
 /*export const api = axios.create({
   baseURL: "http://localhost:3001/api",
 });*/
 export const api = axios.create({
   baseURL: "https://houseappserver.vercel.app/api",
 });
+const getAuthorizationHeader = async () => {
+  const token = getTokenFromLocalStorge();
 
-let headers = {
-  Authorization: `Bearer ${getTokenFromLocalStorge()}`,
+  if (token) {
+    return `Bearer ${token}`;
+  }
+
+  return null;
 };
 
 export const getAllProperties = async () => {
@@ -58,6 +60,11 @@ export const getFilterProperties = async (
   UrlQueryCity,
   UrlQuerystate
 ) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/getFilterProperties",
@@ -85,6 +92,11 @@ export const getFilterProperties = async (
 };
 
 export const getSinglePropertie = async (id) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.get(
       `/Residency/getResidency/${id}`,
@@ -109,6 +121,11 @@ export const getSinglePropertie = async (id) => {
   }
 };
 export const getMyResidences = async (email) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/getMyResidences",
@@ -132,6 +149,11 @@ export const getMyResidences = async (email) => {
 };
 
 export const getAllFavorite = async (email) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/getAllFavorite",
@@ -153,6 +175,11 @@ export const getAllFavorite = async (email) => {
 };
 
 export const addResidence = async (data) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/addResidency",
@@ -175,6 +202,11 @@ export const addResidence = async (data) => {
   }
 };
 export const sendEditData = async (data) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/editResidency",
@@ -198,6 +230,11 @@ export const sendEditData = async (data) => {
 };
 
 export const sendDelete = async (id) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.delete(`/Residency/DeleteResidency/${id}`, {
       headers,
@@ -218,6 +255,11 @@ export const sendDelete = async (id) => {
 };
 
 export const likePropertie = async (cardId, email) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.patch(
       `/Residency/likeResidency/${cardId}`,
@@ -233,7 +275,7 @@ export const likePropertie = async (cardId, email) => {
     ) {
       throw res.data;
     }
-   // toast.success(res.data.message);
+    // toast.success(res.data.message);
     return res.data;
   } catch (error) {
     //toast(error.response.data.message);
@@ -242,6 +284,11 @@ export const likePropertie = async (cardId, email) => {
   }
 };
 export const checkLikeProperties = async (email) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post(
       "/Residency/checkLikeResidency",
@@ -324,6 +371,11 @@ export const getUserData = async (token) => {
 };
 
 export const sendEditUserData = async (data) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post("/Users/EditUserData", { data }, { headers });
     if (
@@ -342,6 +394,11 @@ export const sendEditUserData = async (data) => {
   }
 };
 export const getInfo = async (data) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post("/Users/getSellerInfo", { data }, { headers });
     if (
@@ -360,6 +417,11 @@ export const getInfo = async (data) => {
 };
 /// admin area
 export const getAdminData = async (email) => {
+  const authorizationHeader = await getAuthorizationHeader();
+
+  const headers = {
+    Authorization: authorizationHeader,
+  };
   try {
     const res = await api.post("/Users/getAdminData", { email }, { headers });
     if (

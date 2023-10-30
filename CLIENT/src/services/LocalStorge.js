@@ -16,10 +16,9 @@ export const deleteUserFromLocalStorge = () => {
   }
 };
 
-export const getTokenFromLocalStorge = () => {
-  return (
-    checkUserFromLocalStorge().token ||
-    JSON.parse(localStorage.getItem("user")).token ||
-    "somthing went wrong"
-  );
+export const getTokenFromLocalStorge =  () => {
+  if (localStorage.getItem("user")) {
+    const x = JSON.parse(localStorage.getItem("user"));
+    return x.token;
+  }
 };

@@ -63,6 +63,8 @@
 ### :dart: Features
 
 - Admin dashboard with a full control for the website
+- full auth system with authentication and authorization and password reset via email
+- user profile page to edit profile with picture
 - all CRUD features Plus also a favorite features
 - Modern and slick design With animations
 - Using the high end Tech StackS

@@ -11,6 +11,7 @@ import {
   addUserToLoacalStorge,
   deleteUserFromLocalStorge,
   checkUserFromLocalStorge,
+  getTokenFromLocalStorge
 } from "../services/LocalStorge";
 import { useQuery } from "@tanstack/react-query";
 
@@ -45,10 +46,10 @@ export const UseUserData = async (token) => {
 
 export const setUserToReactApp = async () => {
   try {
-    if (!checkUserFromLocalStorge()?.token) {
+    if (!getTokenFromLocalStorge()) {
       return;
     }
-    const token = await checkUserFromLocalStorge()?.token;
+    const token = await getTokenFromLocalStorge();
     const user = await UseUserData(token);
     return user;
   } catch (error) {
