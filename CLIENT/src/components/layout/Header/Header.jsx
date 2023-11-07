@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Header.css";
 import useHeaderColor from "../../../hooks/useHeaderColor";
 import { Box, Button, Typography, ListItemButton, List } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ROUTES from "../../../routes/routesModel";
 import ProfileMenu from "../../ProfileMenu/ProfileMenu";
 import { useContext } from "react";
@@ -27,6 +27,8 @@ const Header = () => {
     navigate(ROUTES.ROOT);
   };
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const currentUrl = location.pathname;
 
   const { isDark, togleIsDark } = useTheme();
   return (
@@ -34,7 +36,7 @@ const Header = () => {
       <div className="flexCenter innerWidth paddings h-container">
         {/* logo */}
         <img
-        loading="lazy"
+          loading="lazy"
           className="mylogo"
           onClick={() => {
             navigate(ROUTES.ROOT);
@@ -51,7 +53,17 @@ const Header = () => {
             className="flexCenter h-menu"
           >
             <Button size="small" variant="contained">
-              <a href="#contact-us">Contact Us</a>
+              {currentUrl === "/" ? (
+                <a href="#contact-us">Contact Us</a>
+              ) : (
+                <a
+                  onClick={() => {
+                    navigate(ROUTES.CONTACT);
+                  }}
+                >
+                  Contact Us
+                </a>
+              )}
             </Button>
             <Button
               size="small"
@@ -103,7 +115,7 @@ const Header = () => {
         <span className="menu-icon">
           <Box>
             {UserDetails && (
-              <Box sx={{ pr:"2px" }}>
+              <Box sx={{ pr: "2px" }}>
                 <ProfileMenu user={UserDetails} logout={logout} />
               </Box>
             )}
@@ -181,7 +193,7 @@ const Header = () => {
               )}
               <ListItemButton>
                 <Button
-                variant="outlined"
+                  variant="outlined"
                   component="a"
                   onClick={() => {
                     setOpen(false);

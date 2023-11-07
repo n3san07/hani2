@@ -16,6 +16,7 @@ import MainLayOut from "../components/layout/main/MainLayOut.jsx";
 import AdminDashboard from "../components/Admin/AdminDashboard";
 import ForgetPassword from "../components/forget-rest-Password/ForgetPassword";
 import RestPassword from "../components/forget-rest-Password/RestPassword";
+import Contact from "../components/Contact/Contact";
 const Router = () => {
   const { UserDetails } = useContext(UserDetailsContext);
 
@@ -27,6 +28,7 @@ const Router = () => {
         element={UserDetails ? <MainLayOut /> : <LogIn />}
       />
       <Route path={ROUTES.SIGNUP} element={<SignUp />} />
+      <Route path={ROUTES.CONTACT} element={<Contact />} />
       <Route path={ROUTES.RESIDENCES}>
         <Route index element={<Residences />} />
         <Route path=":id" element={<ResidenceDetails />} />
